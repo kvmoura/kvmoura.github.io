@@ -1,130 +1,297 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Stardust • Consultoria em Produtos e Dados</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Stardust • Consultoria em Produto & Dados</title>
+  <meta name="description" content="Consultoria em produto de software, análise de dados de produto e IA responsável por Karina Moura (Data Stardust). Estratégia, discovery, métricas, integrações e capacitação."/>
   <style>
-    body {
-      margin: 0;
-      font-family: "Inter", Arial, sans-serif;
-      color: #222;
-      background: #fdfdfd;
+    :root{
+      --bg: #0f1021; /* fundo escuro profundo para hero */
+      --surface: #ffffff; /* cartões */
+      --muted: #f6f7fb; /* seções claras */
+      --ink: #181a1f; /* texto principal */
+      --ink-2: #4a4f5a; /* texto secundário */
+      --primary: #6a4cff; /* violeta */
+      --primary-2: #9b8cff; /* violeta claro */
+      --accent: #19c6c9; /* ciano suave para detalhes */
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(16, 20, 40, .12);
+      --space: clamp(16px, 2.5vw, 28px);
+      --maxw: 1080px;
     }
-    header {
-      background: linear-gradient(135deg, #4b0082, #6a0dad, #8a2be2);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: .5rem;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      background: #eee;
-      padding: .8rem;
-    }
-    nav a {
-      text-decoration: none;
-      color: #4b0082;
-      font-weight: bold;
-    }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h2 {
-      color: #4b0082;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    footer {
-      text-align: center;
-      background: #4b0082;
-      color: white;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:#fff; line-height:1.55}
+    a{color:var(--primary); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--space)}
+    /* Header */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(6px); background:rgba(255,255,255,.7); border-bottom:1px solid #eef0f5}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px}
+    .logo{width:28px; height:28px; border-radius:8px; background: radial-gradient(120% 120% at 10% 10%, var(--primary) 0%, #7b5bff 60%, var(--accent) 100%); box-shadow:0 4px 10px rgba(106,76,255,.35)}
+    .nav a{font-weight:600}
+    .actions a.btn{padding:10px 14px; border-radius:12px; background:var(--primary); color:#fff; box-shadow:var(--shadow)}
+    .actions a.btn.outline{background:transparent; color:var(--primary); border:1.5px solid var(--primary)}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg, var(--bg) 0%, #171936 60%, #1b1e40 100%); color:#fff; padding:72px 0 56px}
+    .hero h1{margin:0 0 12px; font-size:clamp(28px, 4vw, 46px); line-height:1.1}
+    .hero p{color:#e9e9ff; font-size:clamp(16px, 1.8vw, 20px); max-width:880px}
+    .hero .badge{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:999px; color:#d5d7ff; margin-bottom:16px}
+    .cta{display:flex; gap:12px; margin-top:22px}
+    .cta a{display:inline-block; padding:12px 16px; border-radius:14px; font-weight:700}
+    .cta .primary{background:var(--accent); color:#0b1b1c}
+    .cta .ghost{border:1.5px solid rgba(255,255,255,.3); color:#fff}
+
+    /* Trust strip */
+    .strip{background:var(--muted); border-bottom:1px solid #eef0f5}
+    .strip .items{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; padding:14px 0; color:#656b78; font-size:14px}
+
+    /* Sections */
+    section{padding:56px 0}
+    h2{font-size:clamp(22px, 3vw, 32px); margin:0 0 12px; letter-spacing:.2px}
+    .sub{color:var(--ink-2); margin:0 0 24px}
+
+    /* Grid cards */
+    .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px}
+    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px}
+    .card h3{margin:0 0 8px; font-size:18px}
+    .card p{margin:0}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#f0f1ff; color:#5147ff; font-weight:600; font-size:12px}
+
+    /* Two-column */
+    .cols{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
+    @media (max-width: 860px){ .cols{grid-template-columns:1fr} }
+
+    /* Process */
+    .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+    .step{background:var(--surface); border-radius:14px; padding:18px; border:1px solid #eef0f5}
+    .step b{display:block; margin-bottom:6px}
+
+    /* Pricing-like */
+    .plans{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+    .plan{background:var(--surface); border-radius:16px; box-shadow:var(--shadow); padding:22px; border:1px solid #eef0f5}
+    .plan h3{margin:0 0 6px}
+    .plan ul{margin:12px 0 0; padding-left:18px}
+
+    /* Footer */
+    footer{background:#0f1128; color:#c9cbe6; padding:32px 0; margin-top:24px}
+    footer a{color:#c9e7ff}
   </style>
 </head>
 <body>
-
+  <!-- Header -->
   <header>
-    <h1>Data Stardust</h1>
-    <p>Consultoria em Produtos de Software & Análise de Dados</p>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>Data Stardust</div>
+      </div>
+      <nav class="actions">
+        <a href="#servicos">Serviços</a>
+        &nbsp;·&nbsp;
+        <a href="#casos">Resultados</a>
+        &nbsp;·&nbsp;
+        <a href="#processo">Processo</a>
+        &nbsp;·&nbsp;
+        <a href="#contato" class="btn">Fale comigo</a>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <a href="#servicos">Serviços</a>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#contato">Contato</a>
-  </nav>
-
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <div class="services">
-      <div class="card">
-        <h3>Gestão de Produto</h3>
-        <p>Estruturamos a visão, a estratégia e o roadmap do seu produto para alcançar fit com o mercado e gerar valor sustentável.</p>
-      </div>
-      <div class="card">
-        <h3>Análise de Dados de Produto</h3>
-        <p>Desenvolvemos análises e dashboards que revelam insights de uso, retenção e oportunidades de crescimento.</p>
-      </div>
-      <div class="card">
-        <h3>Discovery e Estratégia</h3>
-        <p>Conduzimos processos de discovery para identificar dores dos clientes e transformá-las em hipóteses de solução viáveis.</p>
-      </div>
-      <div class="card">
-        <h3>Treinamentos & Workshops</h3>
-        <p>Capacitamos equipes em práticas de Product Management, métricas de produto e cultura data-driven.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="badge">Consultoria por <strong>Karina Moura</strong> — Produto, Dados & IA Responsável</div>
+      <h1>Estratégia de Produto + Dados acionáveis<br/>para destravar crescimento com responsabilidade</h1>
+      <p>
+        Ajudo empresas a evoluírem seus produtos de software com <strong>visão estratégica</strong>,
+        <strong>métricas de produto</strong> e <strong>boas práticas de IA responsável</strong>.
+        Minha experiência inclui liderança em <em>marketing automation</em>, gestão de contatos, segmentação, integrações e compliance — com entregas de alto impacto na RD Station (TOTVS).
+      </p>
+      <div class="cta">
+        <a class="primary" href="#contato">Agendar diagnóstico</a>
+        <a class="ghost" href="#sobre">Conhecer minha abordagem</a>
       </div>
     </div>
   </section>
 
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>
-      A <strong>Data Stardust</strong> nasceu para apoiar empresas que querem evoluir seus produtos digitais com 
-      <em>estratégia, dados e inovação responsável</em>. Atuamos na interseção entre tecnologia, 
-      experiência do usuário e inteligência de negócios, ajudando a transformar dados em decisões 
-      e ideias em produtos sustentáveis.
-    </p>
+  <!-- Trust strip / expertise highlights -->
+  <div class="strip">
+    <div class="wrap items">
+      <div>✓ Roadmaps e priorização orientados a valor</div>
+      <div>✓ Segmentação, retenção e métricas (AARRR, North Star)</div>
+      <div>✓ IA Responsável: princípios, requisitos e governança</div>
+      <div>✓ Integrações, ecossistema e confiabilidade de plataforma</div>
+    </div>
+  </div>
+
+  <!-- Serviços -->
+  <section id="servicos">
+    <div class="wrap">
+      <h2>Como posso ajudar</h2>
+      <p class="sub">Pacotes flexíveis, com foco no que gera impacto nos próximos 90 dias — sem perder a visão de longo prazo.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="pill">Estratégia de Produto</span>
+          <h3>Direção clara e priorização</h3>
+          <p>Definição de visão, objetivos e outcomes, desenho de roadmaps por horizontes, matrizes de priorização e tradução de estratégia em backlog acionável.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Dados de Produto</span>
+          <h3>Métricas que guiam decisões</h3>
+          <p>Instrumentação, definição de North Star e OMTM, coorte, funil, retenção, churn, uso por segmento, e dashboards executivos.
+          </p>
+        </div>
+        <div class="card">
+          <span class="pill">IA Responsável & Compliance</span>
+          <h3>Valor com segurança</h3>
+          <p>Aplicação prática de princípios (EAD/IEEE), requisitos funcionais e não-funcionais, avaliação de riscos, testes, documentação e governança de IA.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Discovery & UX Research</span>
+          <h3>Aprendizado rápido com clientes</h3>
+          <p>Jobs To Be Done, entrevistas, mapeamento de dores, definição de hipóteses, experimentos e validação de solução/valor.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Integrações & Plataforma</span>
+          <h3>Ecossistema e confiabilidade</h3>
+          <p>Arquitetura orientada a eventos, integrações com CRM/e-commerce, revisão de SLIs/SLOs, diagnóstico de falhas e consistência de dados.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Treinamentos</span>
+          <h3>Capacitação de times</h3>
+          <p>Workshops de métricas de produto, discovery, escrita de PRDs, ética em IA, e rituais de execução para aumentar cadência e qualidade.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>Quer conversar sobre seu produto ou projeto? Entre em contato:</p>
-    <ul>
-      <li>Email: <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/kvmoura/" target="_blank">Karina Moura</a></li>
-    </ul>
+  <!-- Sobre + Diferenciais em duas colunas -->
+  <section id="sobre" style="background:var(--muted)">
+    <div class="wrap cols">
+      <div>
+        <h2>Quem sou</h2>
+        <p class="sub">Sou <strong>Karina Moura</strong>, Product Manager com background em desenvolvimento de software e ciência de dados. Atuei nos pilares de <em>contact management</em>, segmentação, integridade de dados, integrações e privacidade no RD Station (TOTVS), e pesquiso <strong>ética aplicada à IA</strong>.</p>
+        <p>Trago uma abordagem prática, orientada a resultados e explicável: decisões baseadas em dados, comunicação clara entre áreas, e responsabilidade no uso de IA.</p>
+      </div>
+      <div>
+        <h2>Meus diferenciais</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card"><h3>Estratégia + Execução</h3><p>Conecto diretriz executiva ao dia a dia do time — do outcome ao ticket — mantendo cadência de entrega.</p></div>
+          <div class="card"><h3>Dados acionáveis</h3><p>Métricas que explicam causa e efeito, não só relatam. Foco em aprender e decidir.</p></div>
+          <div class="card"><h3>Confiabilidade</h3><p>Obcecada por integridade de dados, SLIs/SLOs e redução de incidentes que corroem valor.</p></div>
+          <div class="card"><h3>IA com responsabilidade</h3><p>Frameworks para reduzir riscos, construir confiança e acelerar adoção com critérios claros.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos / Resultados (sem dados sensíveis) -->
+  <section id="casos">
+    <div class="wrap">
+      <h2>Resultados em que atuei</h2>
+      <p class="sub">Alguns destaques da minha trajetória (descritos de forma genérica por confidencialidade):</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Flexibilização de entrada de leads</h3>
+          <p>Permitiu criação e gestão de contatos sem e-mail, abrindo caminho para identificadores multicanal (ex.: telefone/WhatsApp) e novas estratégias de pricing.</p>
+        </div>
+        <div class="card">
+          <h3>Reestruturação de segmentação</h3>
+          <p>Aumento de adoção e redução de erros, com melhorias em usabilidade, performance e indicadores de confiabilidade.</p>
+        </div>
+        <div class="card">
+          <h3>Integrações & ecossistema</h3>
+          <p>Novas integrações com e-commerce por iPaaS, impulsionando expansão de mercado e cobertura de casos críticos de dados.</p>
+        </div>
+        <div class="card">
+          <h3>IA aplicada</h3>
+          <p>Entrega de capacidades de inteligência (ex.: otimização de envio) com critérios de avaliação, documentação e mitigação de risco.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Processo de trabalho -->
+  <section id="processo" style="background:var(--muted)">
+    <div class="wrap">
+      <h2>Como trabalho</h2>
+      <p class="sub">Transparência, velocidade de aprendizado e foco em impacto mensurável.</p>
+      <div class="steps">
+        <div class="step"><b>1) Diagnóstico</b>Entendimento de contexto, metas e dores. Levantamento de métricas, arquitetura e processos.</div>
+        <div class="step"><b>2) Plano & hipóteses</b>Definição de outcomes, riscos e apostas. Roadmap tático com critérios de sucesso.</div>
+        <div class="step"><b>3) Entrega</b>Suporte na execução (discovery/PRDs/experimentos), ritos de acompanhamento e comunicação entre áreas.</div>
+        <div class="step"><b>4) Acompanhamento</b>Medição de resultados, ajustes, e handover com documentação para autonomia do time.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos / Formas de contratação -->
+  <section id="planos">
+    <div class="wrap">
+      <h2>Formatos de contratação</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Diagnóstico Express (2–3 semanas)</h3>
+          <p>Mapa de oportunidades priorizadas e plano de 90 dias.</p>
+          <ul>
+            <li>Entrevistas rápidas + revisão de métricas</li>
+            <li>Top 5 apostas por impacto vs. esforço</li>
+            <li>Roadmap tático com primeiros experimentos</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <h3>Projeto Estratégico (1–3 meses)</h3>
+          <p>Do diagnóstico à entrega das primeiras melhorias.</p>
+          <ul>
+            <li>Discovery, métricas, PRDs e acompanhamento</li>
+            <li>Integrações/dados: consistência e confiabilidade</li>
+            <li>IA responsável: requisitos e governança</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <h3>Advisory Contínuo</h3>
+          <p>Mentoria executiva e revisão mensal de estratégia e resultados.</p>
+          <ul>
+            <li>Office hours quinzenais</li>
+            <li>Revisão de roadmap, métricas e riscos</li>
+            <li>Suporte a decisões críticas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" style="background:linear-gradient(180deg, #fafbff 0%, #f3f5ff 100%)">
+    <div class="wrap cols">
+      <div>
+        <h2>Vamos conversar?</h2>
+        <p class="sub">Conte seu contexto e eu proponho o melhor formato. Sem compromisso.</p>
+        <p><strong>Email:</strong> <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a><br/>
+           <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kvmoura/" target="_blank" rel="noopener">/in/kvmoura</a></p>
+      </div>
+      <div class="card">
+        <h3>Checklist do primeiro contato</h3>
+        <ul>
+          <li>Objetivos de negócio (próx. 6–12 meses)</li>
+          <li>Métricas atuais e principais dores</li>
+          <li>Arquitetura e integrações críticas</li>
+          <li>Riscos e restrições (compliance/IA)</li>
+        </ul>
+        <p style="margin-top:12px;color:var(--ink-2)">Com isso, preparo um diagnóstico inicial e próximos passos.</p>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 Data Stardust — Consultoria em Produtos e Dados</p>
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
+      <div>© 2025 Data Stardust — Consultoria em Produto & Dados</div>
+      <div><a href="#">Política de Privacidade</a> · <a href="#">Termos</a></div>
+    </div>
   </footer>
-
 </body>
 </html>
