@@ -1,293 +1,381 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Currículo • Karina Moura — Data Stardust</title>
-  <meta name="description" content="Currículo de Karina Moura — consultoria em produto de software, análise de dados e IA responsável."/>
-  <style>
-    :root{
-      --bg: #0f1021;
-      --surface: #ffffff;
-      --muted: #f6f7fb;
-      --ink: #181a1f;
-      --ink-2: #4a4f5a;
-      --primary: #6a4cff;
-      --accent: #19c6c9;
-      --radius: 16px;
-      --shadow: 0 8px 24px rgba(16, 20, 40, .12);
-      --space: clamp(16px, 2.5vw, 28px);
-      --maxw: 980px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:#fff; line-height:1.55}
-    a{color:var(--primary); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--space)}
-    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(6px); background:rgba(255,255,255,.7); border-bottom:1px solid #eef0f5}
-    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; gap:10px; align-items:center; font-weight:800}
-    .logo{width:28px; height:28px; border-radius:8px; background: radial-gradient(120% 120% at 10% 10%, var(--primary) 0%, #7b5bff 60%, var(--accent) 100%)}
-    .actions a.btn{padding:10px 14px; border-radius:12px; background:var(--primary); color:#fff; box-shadow:var(--shadow)}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume - Karina Moura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg: #0f1021;
+            --surface: #ffffff;
+            --muted: #f6f7fb;
+            --ink: #181a1f;
+            --ink-2: #4a4f5a;
+            --primary: #6a4cff;
+            --accent: #19c6c9;
+            --radius: 16px;
+            --shadow: 0 8px 24px rgba(16, 20, 40, .12);
+            --space: clamp(16px, 2.5vw, 28px);
+            --maxw: 980px;
+        }
 
-    .hero{background:linear-gradient(180deg, var(--bg) 0%, #171936 60%, #1b1e40 100%); color:#fff; padding:60px 0}
-    .hero h1{margin:0 0 8px; font-size:clamp(26px, 3.6vw, 42px)}
-    .hero p{margin:0; color:#e9e9ff}
-
-    section{padding:42px 0}
-    h2{font-size:clamp(20px, 2.6vw, 28px); margin:0 0 8px}
-    .sub{color:var(--ink-2); margin:0 0 20px}
-
-    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px}
-
-    .grid{display:grid; grid-template-columns:1fr; gap:16px}
-    .cols{display:grid; grid-template-columns:1fr .6fr; gap:20px}
-    @media (max-width:900px){ .cols{grid-template-columns:1fr} }
-
-    .list{margin:10px 0 0; padding-left:18px}
-    .tag{display:inline-block; padding:6px 10px; border-radius:999px; background:#f0f1ff; color:#5147ff; font-weight:600; font-size:12px; margin-right:8px}
-
-    .xp h3{margin:0 0 2px}
-    .xp .meta{color:var(--ink-2); font-size:14px; margin-bottom:6px}
-    .xp ul{margin:6px 0 12px; padding-left:18px}
-
-    footer{background:#0f1128; color:#c9cbe6; padding:24px 0; margin-top:24px; text-align:center}
-  </style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg);
+            color: var(--ink);
+        }
+        h1, h2, h3 {
+            font-family: 'Lato', sans-serif;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--ink-2);
+            border: 2px solid var(--surface);
+        }
+        .timeline-item.active::before {
+            background-color: var(--accent);
+        }
+        .nav-link.active {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>Data Stardust</div>
-      </div>
-      <nav class="actions">
-        <a href="/">Consultoria</a>
-        <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Stardust • Consultoria em Produtos e Dados</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Inter", Arial, sans-serif;
-      color: #222;
-      background: #fdfdfd;
-    }
-    header {
-      background: linear-gradient(135deg, #4b0082, #6a0dad, #8a2be2);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: .5rem;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      background: #eee;
-      padding: .8rem;
-    }
-    nav a {
-      text-decoration: none;
-      color: #4b0082;
-      font-weight: bold;
-    }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h2 {
-      color: #4b0082;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    footer {
-      text-align: center;
-      background: #4b0082;
-      color: white;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
-</head>
-<body>
+<body class="antialiased text-gray-800">
 
-  <header>
-    <h1>Data Stardust</h1>
-    <p>Consultoria em Produtos de Software & Análise de Dados</p>
-  </header>
-
-  <nav>
-    <a href="#servicos">Serviços</a>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#contato">Contato</a>
-  </nav>
-
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <div class="services">
-      <div class="card">
-        <h3>Gestão de Produto</h3>
-        <p>Estruturamos a visão, a estratégia e o roadmap do seu produto para alcançar fit com o mercado e gerar valor sustentável.</p>
-      </div>
-      <div class="card">
-        <h3>Análise de Dados de Produto</h3>
-        <p>Desenvolvemos análises e dashboards que revelam insights de uso, retenção e oportunidades de crescimento.</p>
-      </div>
-      <div class="card">
-        <h3>Discovery e Estratégia</h3>
-        <p>Conduzimos processos de discovery para identificar dores dos clientes e transformá-las em hipóteses de solução viáveis.</p>
-      </div>
-      <div class="card">
-        <h3>Treinamentos & Workshops</h3>
-        <p>Capacitamos equipes em práticas de Product Management, métricas de produto e cultura data-driven.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>
-      A <strong>Data Stardust</strong> nasceu para apoiar empresas que querem evoluir seus produtos digitais com 
-      <em>estratégia, dados e inovação responsável</em>. Atuamos na interseção entre tecnologia, 
-      experiência do usuário e inteligência de negócios, ajudando a transformar dados em decisões 
-      e ideias em produtos sustentáveis.
-    </p>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>Quer conversar sobre seu produto ou projeto? Entre em contato:</p>
-    <ul>
-      <li>Email: <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/kvmoura/" target="_blank">Karina Moura</a></li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>© 2025 Data Stardust — Consultoria em Produtos e Dados</p>
-  </footer>
-
-</body>
-</html>
-
-        <a class="btn" href="#contato">Contato</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="wrap">
-      <h1>Currículo — Karina Moura</h1>
-      <p>Product Manager • Dados de Produto • IA Responsável</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap cols">
-      <div>
-        <div class="card">
-          <h2>Resumo</h2>
-          <p class="sub">Product Manager com background em desenvolvimento de software e ciência de dados. Experiência em marketing automation, gestão de contatos, segmentação, integrações, confiabilidade de plataforma e privacidade. Pesquisa e aplica princípios de <strong>IA responsável</strong> no ciclo de vida do produto.</p>
-          <div>
-            <span class="tag">Estratégia & Execução</span>
-            <span class="tag">Métricas de Produto</span>
-            <span class="tag">Discovery</span>
-            <span class="tag">Plataforma & Integrações</span>
-            <span class="tag">IA Responsável</span>
-          </div>
+    <!-- Top Header Section -->
+    <header class="bg-indigo-950 text-white py-8 px-6 sm:px-12 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-lg">DS</div>
+                <h1 class="text-3xl font-bold">Data Stardust</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="mailto:kvargasmoura@gmail.com" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition-colors">Contact</a>
+            </nav>
         </div>
-
-        <div class="card xp" style="margin-top:16px">
-          <h2>Experiência Selecionada</h2>
-          <h3>Senior Product Manager — RD Station (TOTVS)</h3>
-          <div class="meta">2021–2025 • Marketing Automation, Contact Management, Segmentação, Integrações</div>
-          <ul>
-            <li>Liderança de iniciativas estruturantes em gestão de contatos (chave primária flexível, multicanal) e segmentação.</li>
-            <li>Expansão de integrações (iPaaS) com impacto na adoção por e-commerce e indústria.</li>
-            <li>Entrega de capacidades de IA (otimização de envio), com critérios de avaliação e governança.</li>
-            <li>Foco em confiabilidade: SLIs/SLOs, integridade de dados e redução de incidentes.</li>
-          </ul>
-
-          <h3>Product Manager — Projetos & Pesquisa</h3>
-          <div class="meta">2017–2021 • Consultoria, EdTech, Analytics</div>
-          <ul>
-            <li>Projetos de dados, dashboards executivos e automação analítica para tomada de decisão.</li>
-            <li>Workshops de discovery, métricas e desenho de experimentos.</li>
-          </ul>
+        <div class="max-w-7xl mx-auto mt-8">
+            <h2 class="text-4xl font-bold mb-2">Karina Moura</h2>
+            <p class="text-xl text-gray-300">Product Manager • Product Data • Responsible AI</p>
         </div>
+    </header>
 
-        <div class="card" style="margin-top:16px">
-          <h2>Formação</h2>
-          <ul class="list">
-            <li>Mestrado (em curso) — IA & Ética</li>
-            <li>Graduação — Administração com ênase em Processos de Ciência de Dados</li>
-          </ul>
+    <!-- Main Content Area -->
+    <main class="py-12 px-6 sm:px-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Summary Section -->
+                <section id="resumo" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Summary</h2>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        Senior Product Manager with 6+ years in SaaS and 8 years in data-driven product development. At RD Station, I lead strategic initiatives in the marketing automation platform, driving innovation in contact management, segmentation, data interoperability, and legal compliance.
+                        One of my most impactful contributions was leading the **Catalisa.AI** initiative, an exploratory analysis that mapped customer pains, product gaps, and market trends. The project served as a strategic intelligence hub, guiding leadership decisions on AI investments and driving RDSM modernization. This initiative laid the foundation for the platform's evolution toward intelligent automation, omnichannel scalability, and sustainable growth.
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700 mt-4">
+                        In parallel, I have led complex projects such as the redesign of lead identity logic, a long-term effort requiring alignment across legacy systems, interfaces, and squads. This foundational change enables flexible data input, improves deduplication, and supports a multichannel strategy, positioning RD Station as a key platform for marketing orchestration.
+                        My responsibilities span defining product roadmaps, translating strategy into measurable outcomes, and ensuring stakeholder alignment across engineering, design, support, and business teams. With Agile methodologies, I focus on transforming complex challenges into scalable, value-driven solutions.
+                    </p>
+                </section>
+
+                <!-- Experience Section -->
+                <section id="experience" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Experience</h2>
+                    <p class="text-gray-600 mb-8 max-w-3xl">
+                        Navigate my professional journey interactively. Click on each company to expand and see in detail the projects, responsibilities, and results I achieved in each role.
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3">
+                            <div id="timeline-nav" class="relative border-l-2 border-gray-300 ml-4">
+                                <!-- Timeline navigation items will be injected here by JS -->
+                            </div>
+                        </div>
+                        <div id="experience-details" class="md:w-2/3">
+                            <!-- Experience details will be injected here by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other Activities Section -->
+                <section id="other-activities" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Other Activities</h2>
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <h3 class="font-bold text-xl text-gray-900 mb-2">Product Mentorship</h3>
+                            <p class="text-gray-600">I currently serve as a mentor in the **Women of Product** initiative, contributing to the development of future leaders and assisting in the training of professionals in the field.</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <h3 class="font-bold text-xl text-gray-900 mb-2">Professional Education</h3>
+                            <p class="text-gray-600">I taught a class to a 9th-grade elementary school class on technology, artificial intelligence, agile teams, programming, and game creation.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Education Section -->
+                <section id="formacao" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Education</h2>
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <p class="font-bold text-gray-900">Master's Degree in Artificial Intelligence, Robotics, Ethics</p>
+                            <p class="text-gray-600">Federal University of Rio Grande do Sul (Expected Completion: January 2025)</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <p class="font-bold text-gray-900">Bachelor's Degree in Business Administration and Management, Data Science</p>
+                            <p class="text-gray-600">Federal University of Rio Grande do Sul (2011-2018)</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <p class="font-bold text-gray-900">Bachelor's Degree in Computer Engineering</p>
+                            <p class="text-gray-600">Federal University of Rio Grande do Sul (2008-2011)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- Contact Section -->
+                <section id="contato" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Contact</h2>
+                    <div class="text-lg">
+                        <p class="mb-2"><span class="font-bold">Email:</span> <a href="mailto:kvargasmoura@gmail.com" class="text-purple-600 hover:underline">kvargasmoura@gmail.com</a></p>
+                        <p><span class="font-bold">LinkedIn:</span> <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-purple-600 hover:underline">/in/kvmoura</a></p>
+                    </div>
+                </section>
+
+                <!-- Skills Section -->
+                <section id="competencias" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Skills</h2>
+                     <p class="text-gray-600 mb-8 max-w-3xl">
+                        My competencies in product management and data science. The chart below visualizes my focus and expertise in each area.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </section>
+                
+                 <!-- Certifications Section -->
+                <section id="certificacoes" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Certifications</h2>
+                    <div class="space-y-6">
+                         <div class="p-6 rounded-lg border border-gray-200">
+                            <p class="font-bold text-gray-900">Product Analytics - Certification</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-gray-200">
+                            <p class="font-bold text-gray-900">Introduction to Data Analytics on Google Cloud - Certification</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-      </div>
+    </main>
 
-      <aside>
-        <div class="card">
-          <h2>Contato</h2>
-          <p><strong>Email:</strong> <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a><br>
-             <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kvmoura/" target="_blank" rel="noopener">/in/kvmoura</a></p>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Product Strategy',
+                        'Product Analytics',
+                        'Market Intelligence',
+                        'Data-Driven Development',
+                        'Agile Methodologies',
+                        'Applied AI'
+                    ],
+                    datasets: [{
+                        label: 'Experience Level',
+                        data: [95, 90, 85, 92, 88, 80],
+                        backgroundColor: 'rgba(25, 198, 201, 0.6)',
+                        borderColor: 'rgba(25, 198, 201, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'var(--accent)',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 12
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return ` Expertise: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                             ticks: {
+                                font: {
+                                    size: 14,
+                                    family: "'Roboto', sans-serif"
+                                },
+                                color: 'var(--ink)'
+                            }
+                        }
+                    }
+                }
+            });
 
-        <div class="card" style="margin-top:16px">
-          <h2>Competências</h2>
-          <ul class="list">
-            <li>Estratégia de Produto, Roadmaps, Priorizações</li>
-            <li>Métricas AARRR, North Star, Cohorts</li>
-            <li>Discovery, JTBD, PRDs, Experimentação</li>
-            <li>Plataforma, Integrações (CRM/e-commerce), SLIs/SLOs</li>
-            <li>IA Responsável: requisitos, testes, documentação, governança</li>
-          </ul>
-        </div>
+            // Experience Data
+            const experiences = [
+                {
+                    company: 'Sesc/RS',
+                    role: 'Market Analysis Specialist',
+                    date: 'September 2025 - Present',
+                    details: ['Market Analysis Specialist for expansion and creation of new products and services. Uses public and internal data to generate insights.']
+                },
+                {
+                    company: 'RD Station',
+                    role: 'Senior Product Manager',
+                    date: 'January 2024 - August 2025',
+                    details: [
+                        '**Senior Product Manager - Customer Data Platform (Jan 2024 - Aug 2025):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Led the **Catalisa.AI** initiative, a strategic intelligence project that mapped customer pains and market trends, guiding leadership decisions on AI investments and platform modernization.</li><li>Led a fundamental reformulation of lead identity logic to support a multi-channel strategy, improving data deduplication and flexibility.</li><li>Led a technical restructuring of the segmentation editor and the upgrade of data indexing technology, improving system performance, stability, and reliability.</li></ul>',
+                        '**Product Manager - Native Ecosystem Integrations (Jan 2022 - Dec 2023):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Launched **Campaign Manager**, a marketing funnel analysis tool, which drove a **9% increase in Monthly Recurring Revenue (MRR)**.</li><li>Launched 4 new integrations with e-commerce via an iPaaS partner, **doubling RDSM adoption in the sector**.</li><li>Contributed to the development of the **Intelligent Sending** feature, which enhanced campaign performance and the platform\'s intelligence perception.</li></ul>',
+                        '**Product Manager - Contact Qualification (June 2021 - December 2021):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Contributed to the development of the **Intelligent Sending** feature to identify the best time to send emails, improving engagement rates and campaign performance.</li></ul>'
+                    ]
+                },
+                {
+                    company: 'RNP',
+                    role: 'Technical Assistant',
+                    date: 'January 2022 - December 2022',
+                    details: ['Collaborated with the Technical Committee on Data Science and Artificial Intelligence (CT-CDIA) to study the future of AI applications, with an emphasis on areas of interest to RNP, such as education and cybersecurity.']
+                },
+                {
+                    company: 'Data Science Brigade',
+                    role: 'Product Data Manager',
+                    date: 'October 2019 - May 2021',
+                    details: [
+                        'Led the development of a Natural Language Processing (NLP) solution that automatically analyzes public bidding documents to flag risk patterns, enabling **faster and more comprehensive audits**.'
+                    ]
+                },
+                {
+                    company: 'Cappra Institute',
+                    role: 'Product Data Manager',
+                    date: 'February 2019 - October 2019',
+                    details: [
+                        'Led a national field study involving 40 Brazilian retail organizations, resulting in the creation of an **Analytical Maturity Index (IMA)**.'
+                    ]
+                },
+                {
+                    company: 'Mconf',
+                    role: 'Product Manager',
+                    date: 'December 2016 - February 2019',
+                    details: [
+                        'Led the creation of the go-to-market strategy for Elos.vc, defining the brand identity, messaging, and strategic positioning.'
+                    ]
+                }
+            ];
 
-        <div class="card" style="margin-top:16px">
-          <h2>Idiomas</h2>
-          <ul class="list">
-            <li>Português (nativo)</li>
-            <li>Inglês (intermediário)</li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </section>
+            // Populate Experience Timeline
+            const timelineNav = document.getElementById('timeline-nav');
+            const experienceDetailsContainer = document.getElementById('experience-details');
+            
+            experiences.forEach((exp, index) => {
+                const navItem = document.createElement('div');
+                navItem.classList.add('timeline-item', 'relative', 'ml-8', 'pb-8', 'cursor-pointer');
+                navItem.dataset.index = index;
+                navItem.innerHTML = `
+                    <h3 class="font-bold text-lg text-gray-900">${exp.company}</h3>
+                    <p class="text-sm text-gray-500">${exp.date}</p>
+                `;
+                timelineNav.appendChild(navItem);
 
-  <section id="contato" style="background:var(--muted)">
-    <div class="wrap">
-      <h2>Próximo passo</h2>
-      <p class="sub">Envie o contexto do seu projeto e, se desejar, receba meu currículo completo em PDF.</p>
-      <p><a href="mailto:kvargasmoura@gmail.com" class="actions btn">contato@datastardust.com.br</a></p>
-    </div>
-  </section>
+                const detailItem = document.createElement('div');
+                detailItem.classList.add('experience-detail-content', 'hidden');
+                detailItem.dataset.index = index;
+                let detailHTML = `
+                    <div class="p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">${exp.company}</h3>
+                        <p class="text-md font-semibold text-gray-600 mb-4">${exp.role}</p>
+                `;
+                exp.details.forEach(d => {
+                    detailHTML += `<div class="text-gray-700 leading-relaxed mt-3">${d}</div>`;
+                });
+                detailHTML += `</div>`;
+                detailItem.innerHTML = detailHTML;
+                experienceDetailsContainer.appendChild(detailItem);
+            });
 
-  <footer>
-    <div class="wrap">© 2025 Data Stardust — Karina Moura</div>
-  </footer>
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const detailItems = document.querySelectorAll('.experience-detail-content');
+
+            function showExperience(index) {
+                timelineItems.forEach(item => item.classList.remove('active'));
+                detailItems.forEach(item => item.classList.add('hidden'));
+
+                timelineItems[index].classList.add('active');
+                detailItems[index].classList.remove('hidden');
+            }
+
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    showExperience(item.dataset.index);
+                });
+            });
+
+            // Show first experience by default
+            if(timelineItems.length > 0) {
+                 showExperience(0);
+            }
+        });
+    </script>
 </body>
 </html>
