@@ -1,386 +1,293 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículo Interativo - Karina Moura</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: A single-page application with a fixed sidebar for quick navigation and a main content area. The structure is thematic: Resumo, Habilidades, Experiência, Outras Atividades e Formação. The 'Experiência' section is designed as an interactive vertical timeline where users click a job to reveal details. This structure was chosen to make a text-heavy document easily scannable and engaging, allowing users to drill down into specific areas of interest without being overwhelmed by a long scroll. The interactive timeline transforms passive reading into active exploration. -->
-    <!-- Visualization & Content Choices: 
-        - Resumo (Inform): Simple, impactful text block to set the stage.
-        - Habilidades (Compare/Inform): A horizontal bar chart (Chart.js/Canvas) to visually represent key PM skills, making them easier to digest than a bullet list. Interaction: Tooltips on hover. Justification: Visual comparison is faster and more engaging.
-        - Experiência (Organize/Change): An interactive timeline built with HTML/CSS/JS. Interaction: Click to expand details of each role. Justification: Breaks down a long career history into manageable, user-driven chunks, improving usability and focus.
-        - Outras Atividades/Formação (Organize): Clean, card-based layouts using HTML/Tailwind. Justification: Provides clear, structured information without cognitive overload.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #4A4A4A;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #D1D5DB;
-            border: 2px solid #FDFBF8;
-        }
-        .timeline-item.active::before {
-            background-color: #0D9488;
-        }
-        .nav-link.active {
-            color: #0D9488;
-            font-weight: 700;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currículo • Karina Moura — Data Stardust</title>
+  <meta name="description" content="Currículo de Karina Moura — consultoria em produto de software, análise de dados e IA responsável."/>
+  <style>
+    :root{
+      --bg: #0f1021;
+      --surface: #ffffff;
+      --muted: #f6f7fb;
+      --ink: #181a1f;
+      --ink-2: #4a4f5a;
+      --primary: #6a4cff;
+      --accent: #19c6c9;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(16, 20, 40, .12);
+      --space: clamp(16px, 2.5vw, 28px);
+      --maxw: 980px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:#fff; line-height:1.55}
+    a{color:var(--primary); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--space)}
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(6px); background:rgba(255,255,255,.7); border-bottom:1px solid #eef0f5}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800}
+    .logo{width:28px; height:28px; border-radius:8px; background: radial-gradient(120% 120% at 10% 10%, var(--primary) 0%, #7b5bff 60%, var(--accent) 100%)}
+    .actions a.btn{padding:10px 14px; border-radius:12px; background:var(--primary); color:#fff; box-shadow:var(--shadow)}
+
+    .hero{background:linear-gradient(180deg, var(--bg) 0%, #171936 60%, #1b1e40 100%); color:#fff; padding:60px 0}
+    .hero h1{margin:0 0 8px; font-size:clamp(26px, 3.6vw, 42px)}
+    .hero p{margin:0; color:#e9e9ff}
+
+    section{padding:42px 0}
+    h2{font-size:clamp(20px, 2.6vw, 28px); margin:0 0 8px}
+    .sub{color:var(--ink-2); margin:0 0 20px}
+
+    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px}
+
+    .grid{display:grid; grid-template-columns:1fr; gap:16px}
+    .cols{display:grid; grid-template-columns:1fr .6fr; gap:20px}
+    @media (max-width:900px){ .cols{grid-template-columns:1fr} }
+
+    .list{margin:10px 0 0; padding-left:18px}
+    .tag{display:inline-block; padding:6px 10px; border-radius:999px; background:#f0f1ff; color:#5147ff; font-weight:600; font-size:12px; margin-right:8px}
+
+    .xp h3{margin:0 0 2px}
+    .xp .meta{color:var(--ink-2); font-size:14px; margin-bottom:6px}
+    .xp ul{margin:6px 0 12px; padding-left:18px}
+
+    footer{background:#0f1128; color:#c9cbe6; padding:24px 0; margin-top:24px; text-align:center}
+  </style>
 </head>
-<body class="antialiased">
-    <div class="flex min-h-screen">
-        <!-- Sidebar Navigation -->
-        <aside class="w-1/5 bg-[#F8F5F0] p-8 fixed h-full hidden lg:block">
-            <h1 class="text-2xl font-bold text-teal-700">Karina Moura</h1>
-            <p class="text-sm text-gray-600">Senior Product Manager</p>
-            <nav class="mt-12">
-                <ul class="space-y-4">
-                    <li><a href="#resumo" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Resumo</a></li>
-                    <li><a href="#habilidades" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Habilidades</a></li>
-                    <li><a href="#experiencia" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Experiência</a></li>
-                    <li><a href="#outras-atividades" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Outras Atividades</a></li>
-                    <li><a href="#formacao" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Formação</a></li>
-                </ul>
-            </nav>
-            <div class="absolute bottom-8 text-sm text-gray-500">
-                <p>kvargasmoura@gmail.com</p>
-                <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-teal-600 hover:underline">LinkedIn Profile</a>
-            </div>
-        </aside>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>Data Stardust</div>
+      </div>
+      <nav class="actions">
+        <a href="/">Consultoria</a>
+        <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Stardust • Consultoria em Produtos e Dados</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      color: #222;
+      background: #fdfdfd;
+    }
+    header {
+      background: linear-gradient(135deg, #4b0082, #6a0dad, #8a2be2);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: .5rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: #eee;
+      padding: .8rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #4b0082;
+      font-weight: bold;
+    }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      color: #4b0082;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      background: #4b0082;
+      color: white;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
 
-        <!-- Main Content -->
-        <main class="lg:ml-[20%] w-full lg:w-4/5 p-6 sm:p-12">
-            
-            <!-- Mobile Header -->
-            <div class="lg:hidden mb-8 p-4 bg-[#F8F5F0] rounded-lg shadow">
-                 <h1 class="text-2xl font-bold text-teal-700">Karina Moura</h1>
-                 <p class="text-sm text-gray-600">Senior Product Manager</p>
-                 <div class="mt-4 text-sm text-gray-500">
-                    <p>kvargasmoura@gmail.com</p>
-                    <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-teal-600 hover:underline">LinkedIn Profile</a>
-                 </div>
-            </div>
+  <header>
+    <h1>Data Stardust</h1>
+    <p>Consultoria em Produtos de Software & Análise de Dados</p>
+  </header>
 
-            <!-- Resumo Section -->
-            <section id="resumo" class="mb-16 min-h-[60vh] flex items-center">
-                <div>
-                    <h2 class="text-3xl font-bold text-teal-800 mb-4">Resumo Profissional</h2>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        Gerente de Produto Sênior com mais de 6 anos de experiência em SaaS e 8 anos em desenvolvimento de produto orientado a dados. Líder comprovada na criação de estratégia de produto e na condução da inovação, da descoberta à entrega. Minha expertise reside em utilizar <strong>análise de produto</strong>, <strong>Big Data</strong> e <strong>inteligência de mercado</strong> para desenvolver soluções escaláveis. Tenho um histórico sólido de traduzir desafios de negócio complexos em resultados claros e mensuráveis, garantindo o alinhamento entre as equipes de engenharia, design e negócios. Sou profundamente comprometida com o design ético de produtos e com o fomento de uma cultura de tomada de decisões baseada em dados.
-                    </p>
-                </div>
-            </section>
+  <nav>
+    <a href="#servicos">Serviços</a>
+    <a href="#sobre">Sobre Nós</a>
+    <a href="#contato">Contato</a>
+  </nav>
 
-            <!-- Habilidades Section -->
-            <section id="habilidades" class="mb-16">
-                <h2 class="text-3xl font-bold text-teal-800 mb-6">Habilidades Principais de PM</h2>
-                <p class="text-gray-600 mb-8 max-w-3xl">
-                    Esta seção destaca minhas competências fundamentais em gestão de produtos, desde a concepção estratégica até a execução e análise. O gráfico abaixo visualiza o meu foco e experiência nas diferentes áreas que compõem o ciclo de vida de um produto de sucesso.
-                </p>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="chart-container">
-                        <canvas id="skillsChart"></canvas>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experiência Section -->
-            <section id="experiencia" class="mb-16">
-                <h2 class="text-3xl font-bold text-teal-800 mb-6">Experiência Profissional</h2>
-                 <p class="text-gray-600 mb-12 max-w-3xl">
-                    Navegue pela minha trajetória profissional de forma interativa. Clique em cada empresa para expandir e ver em detalhes os projetos, responsabilidades e os resultados que alcancei em cada função.
-                </p>
-                <div class="flex flex-col md:flex-row gap-8">
-                    <div class="md:w-1/3">
-                        <div id="timeline-nav" class="relative border-l-2 border-gray-200 ml-4">
-                            <!-- Timeline navigation items will be injected here by JS -->
-                        </div>
-                    </div>
-                    <div id="experience-details" class="md:w-2/3">
-                        <!-- Experience details will be injected here by JS -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Outras Atividades Section -->
-            <section id="outras-atividades" class="mb-16">
-                <h2 class="text-3xl font-bold text-teal-800 mb-6">Outras Atividades</h2>
-                 <p class="text-gray-600 mb-8 max-w-3xl">
-                    Além do meu trabalho principal, dedico tempo para compartilhar conhecimento e contribuir com a comunidade de tecnologia e produtos. Estas atividades refletem meu compromisso com o desenvolvimento de novos talentos e a promoção da educação.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                        <h3 class="font-bold text-xl text-teal-700 mb-2">Mentoria em Produto</h3>
-                        <p class="text-gray-600">Atuei como mentora na iniciativa <strong>Mulheres de Produto</strong>, contribuindo para o desenvolvimento de futuras líderes e auxiliando na formação de profissionais na área.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                        <h3 class="font-bold text-xl text-teal-700 mb-2">Educação Profissional</h3>
-                        <p class="text-gray-600">Ministrei aulas para uma turma do 9º ano do ensino fundamental sobre tecnologia, inteligência artificial, times ágeis, programação e criação de jogos.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Formação Section -->
-            <section id="formacao">
-                <h2 class="text-3xl font-bold text-teal-800 mb-6">Formação e Certificações</h2>
-                <p class="text-gray-600 mb-8 max-w-3xl">
-                    Minha base acadêmica e certificações contínuas são a base do meu conhecimento técnico e estratégico. Busco constantemente aprender sobre novas tecnologias e metodologias para aplicar no desenvolvimento de produtos inovadores.
-                </p>
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="font-bold text-teal-700">Mestrado em Inteligência Artificial, Robótica, Ética</p>
-                        <p class="text-gray-600">Universidade Federal do Rio Grande do Sul (Conclusão Prevista: Janeiro de 2025)</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="font-bold text-teal-700">Product Analytics - Certificação</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="font-bold text-teal-700">Introduction to Data Analytics on Google Cloud - Certificação</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="font-bold text-teal-700">Idiomas</p>
-                        <p class="text-gray-600">Português (Nativo), Inglês (Profissional Completo)</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+  <section id="servicos">
+    <h2>Serviços</h2>
+    <div class="services">
+      <div class="card">
+        <h3>Gestão de Produto</h3>
+        <p>Estruturamos a visão, a estratégia e o roadmap do seu produto para alcançar fit com o mercado e gerar valor sustentável.</p>
+      </div>
+      <div class="card">
+        <h3>Análise de Dados de Produto</h3>
+        <p>Desenvolvemos análises e dashboards que revelam insights de uso, retenção e oportunidades de crescimento.</p>
+      </div>
+      <div class="card">
+        <h3>Discovery e Estratégia</h3>
+        <p>Conduzimos processos de discovery para identificar dores dos clientes e transformá-las em hipóteses de solução viáveis.</p>
+      </div>
+      <div class="card">
+        <h3>Treinamentos & Workshops</h3>
+        <p>Capacitamos equipes em práticas de Product Management, métricas de produto e cultura data-driven.</p>
+      </div>
     </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Skills Chart
-            const ctx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'Estratégia de Produto',
-                        'Análise de Produto',
-                        'Inteligência de Mercado',
-                        'Desenvolvimento Orientado a Dados',
-                        'Metodologias Ágeis',
-                        'Gestão de Stakeholders',
-                        'IA Aplicada'
-                    ],
-                    datasets: [{
-                        label: 'Nível de Experiência',
-                        data: [95, 90, 85, 92, 88, 93, 80],
-                        backgroundColor: 'rgba(13, 148, 136, 0.6)',
-                        borderColor: 'rgba(15, 118, 110, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: '#0F766E',
-                            titleFont: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            bodyFont: {
-                                size: 12
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    return ` Expertise: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                            ticks: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                             ticks: {
-                                font: {
-                                    size: 14,
-                                    family: "'Inter', sans-serif"
-                                },
-                                color: '#4A4A4A'
-                            }
-                        }
-                    }
-                }
-            });
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <p>
+      A <strong>Data Stardust</strong> nasceu para apoiar empresas que querem evoluir seus produtos digitais com 
+      <em>estratégia, dados e inovação responsável</em>. Atuamos na interseção entre tecnologia, 
+      experiência do usuário e inteligência de negócios, ajudando a transformar dados em decisões 
+      e ideias em produtos sustentáveis.
+    </p>
+  </section>
 
-            // Experience Data
-            const experiences = [
-                {
-                    company: 'Sesc/RS',
-                    role: 'Inteligência de Mercado',
-                    date: 'Setembro de 2025 - Presente',
-                    details: []
-                },
-                {
-                    company: 'RD Station',
-                    role: 'Gerente de Produto Sênior',
-                    date: 'Janeiro de 2022 - Agosto de 2025',
-                    details: [
-                        '<strong>Gerente de Produto Sênior - Plataforma de Dados do Cliente (Jan 2024 - Ago 2025):</strong><ul><li class="mt-2 ml-4 list-disc">Liderou a iniciativa <strong>Catalisa.AI</strong>, um projeto de inteligência estratégica que mapeou dores do cliente e tendências de mercado, orientando decisões da liderança sobre investimentos em IA e modernização da plataforma.</li><li class="mt-2 ml-4 list-disc">Conduziu uma reformulação fundamental da lógica de identidade de leads para suportar uma estratégia multicanal.</li><li class="mt-2 ml-4 list-disc">Liderou uma reestruturação técnica do editor de segmentação, melhorando o desempenho e a confiabilidade do sistema.</li></ul>',
-                        '<strong>Gerente de Produto - Integrações Nativas de Ecossistema (Jan 2022 - Dez 2023):</strong><ul><li class="mt-2 ml-4 list-disc">Liderou o desenvolvimento de integrações nativas com plataformas como Shopify, o que acelerou o tempo de conexão e <strong>reduziu a evasão (churn)</strong>.</li><li class="mt-2 ml-4 list-disc">Lançou o <strong>Campaign Manager</strong>, impulsionando um <strong>aumento de 9% na Receita Mensal Recorrente (MRR)</strong>.</li></ul>',
-                        '<strong>Gerente de Produto - Qualificação de Contatos (Jun 2021 - Dez 2021):</strong><ul><li class="mt-2 ml-4 list-disc">Contribuiu para o desenvolvimento da funcionalidade <strong>Intelligent Sending</strong>, que aprimorou o desempenho de campanhas.</li></ul>',
-                    ]
-                },
-                {
-                    company: 'Data Science Brigade',
-                    role: 'Gerente de Dados de Produto',
-                    date: 'Outubro de 2019 - Maio de 2021',
-                    details: [
-                        'Liderou o desenvolvimento de uma solução de Processamento de Linguagem Natural (NLP) que analisa automaticamente documentos de licitação pública para sinalizar padrões de risco, permitindo <strong>auditorias mais rápidas e abrangentes</strong>.'
-                    ]
-                },
-                {
-                    company: 'Cappra Institute',
-                    role: 'Gerente de Dados de Produto',
-                    date: 'Fevereiro de 2019 - Outubro de 2019',
-                    details: [
-                        'Liderou um estudo de campo nacional que envolveu 40 organizações de varejo brasileiras, resultando na criação de um <strong>Índice de Maturidade Analítica (IMA)</strong>.'
-                    ]
-                },
-                {
-                    company: 'Mconf',
-                    role: 'Gerente de Produto',
-                    date: 'Dezembro de 2016 - Fevereiro de 2019',
-                    details: [
-                        'Liderou a criação da estratégia de "go-to-market" para o Elos.vc, definindo a identidade de marca, a mensagem e o posicionamento estratégico.'
-                    ]
-                }
-            ];
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Quer conversar sobre seu produto ou projeto? Entre em contato:</p>
+    <ul>
+      <li>Email: <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/in/kvmoura/" target="_blank">Karina Moura</a></li>
+    </ul>
+  </section>
 
-            // Populate Experience Timeline
-            const timelineNav = document.getElementById('timeline-nav');
-            const experienceDetailsContainer = document.getElementById('experience-details');
-            
-            experiences.forEach((exp, index) => {
-                const navItem = document.createElement('div');
-                navItem.classList.add('timeline-item', 'relative', 'ml-8', 'pb-8', 'cursor-pointer');
-                navItem.dataset.index = index;
-                navItem.innerHTML = `
-                    <h3 class="font-bold text-lg text-gray-800">${exp.company}</h3>
-                    <p class="text-sm text-gray-500">${exp.date}</p>
-                `;
-                timelineNav.appendChild(navItem);
+  <footer>
+    <p>© 2025 Data Stardust — Consultoria em Produtos e Dados</p>
+  </footer>
 
-                const detailItem = document.createElement('div');
-                detailItem.classList.add('experience-detail-content', 'hidden');
-                detailItem.dataset.index = index;
-                let detailHTML = `
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold text-teal-700 mb-2">${exp.company}</h3>
-                        <p class="text-md font-semibold text-gray-600 mb-4">${exp.role}</p>
-                `;
-                exp.details.forEach(d => {
-                    detailHTML += `<div class="text-gray-700 leading-relaxed mt-3">${d}</div>`;
-                });
-                detailHTML += `</div>`;
-                detailItem.innerHTML = detailHTML;
-                experienceDetailsContainer.appendChild(detailItem);
-            });
+</body>
+</html>
 
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            const detailItems = document.querySelectorAll('.experience-detail-content');
+        <a class="btn" href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
 
-            function showExperience(index) {
-                timelineItems.forEach(item => item.classList.remove('active'));
-                detailItems.forEach(item => item.classList.add('hidden'));
+  <section class="hero">
+    <div class="wrap">
+      <h1>Currículo — Karina Moura</h1>
+      <p>Product Manager • Dados de Produto • IA Responsável</p>
+    </div>
+  </section>
 
-                timelineItems[index].classList.add('active');
-                detailItems[index].classList.remove('hidden');
-            }
+  <section>
+    <div class="wrap cols">
+      <div>
+        <div class="card">
+          <h2>Resumo</h2>
+          <p class="sub">Product Manager com background em desenvolvimento de software e ciência de dados. Experiência em marketing automation, gestão de contatos, segmentação, integrações, confiabilidade de plataforma e privacidade. Pesquisa e aplica princípios de <strong>IA responsável</strong> no ciclo de vida do produto.</p>
+          <div>
+            <span class="tag">Estratégia & Execução</span>
+            <span class="tag">Métricas de Produto</span>
+            <span class="tag">Discovery</span>
+            <span class="tag">Plataforma & Integrações</span>
+            <span class="tag">IA Responsável</span>
+          </div>
+        </div>
 
-            timelineItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    showExperience(item.dataset.index);
-                });
-            });
+        <div class="card xp" style="margin-top:16px">
+          <h2>Experiência Selecionada</h2>
+          <h3>Senior Product Manager — RD Station (TOTVS)</h3>
+          <div class="meta">2021–2025 • Marketing Automation, Contact Management, Segmentação, Integrações</div>
+          <ul>
+            <li>Liderança de iniciativas estruturantes em gestão de contatos (chave primária flexível, multicanal) e segmentação.</li>
+            <li>Expansão de integrações (iPaaS) com impacto na adoção por e-commerce e indústria.</li>
+            <li>Entrega de capacidades de IA (otimização de envio), com critérios de avaliação e governança.</li>
+            <li>Foco em confiabilidade: SLIs/SLOs, integridade de dados e redução de incidentes.</li>
+          </ul>
 
-            // Show first experience by default
-            if(timelineItems.length > 0) {
-                 showExperience(0);
-            }
-           
+          <h3>Product Manager — Projetos & Pesquisa</h3>
+          <div class="meta">2017–2021 • Consultoria, EdTech, Analytics</div>
+          <ul>
+            <li>Projetos de dados, dashboards executivos e automação analítica para tomada de decisão.</li>
+            <li>Workshops de discovery, métricas e desenho de experimentos.</li>
+          </ul>
+        </div>
 
-            // Active Nav Link on Scroll
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
+        <div class="card" style="margin-top:16px">
+          <h2>Formação</h2>
+          <ul class="list">
+            <li>Mestrado (em curso) — IA & Ética</li>
+            <li>Graduação — Administração com ênase em Processos de Ciência de Dados</li>
+          </ul>
+        </div>
+      </div>
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.4 
-            };
+      <aside>
+        <div class="card">
+          <h2>Contato</h2>
+          <p><strong>Email:</strong> <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a><br>
+             <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kvmoura/" target="_blank" rel="noopener">/in/kvmoura</a></p>
+        </div>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
+        <div class="card" style="margin-top:16px">
+          <h2>Competências</h2>
+          <ul class="list">
+            <li>Estratégia de Produto, Roadmaps, Priorizações</li>
+            <li>Métricas AARRR, North Star, Cohorts</li>
+            <li>Discovery, JTBD, PRDs, Experimentação</li>
+            <li>Plataforma, Integrações (CRM/e-commerce), SLIs/SLOs</li>
+            <li>IA Responsável: requisitos, testes, documentação, governança</li>
+          </ul>
+        </div>
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
+        <div class="card" style="margin-top:16px">
+          <h2>Idiomas</h2>
+          <ul class="list">
+            <li>Português (nativo)</li>
+            <li>Inglês (intermediário)</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="contato" style="background:var(--muted)">
+    <div class="wrap">
+      <h2>Próximo passo</h2>
+      <p class="sub">Envie o contexto do seu projeto e, se desejar, receba meu currículo completo em PDF.</p>
+      <p><a href="mailto:kvargasmoura@gmail.com" class="actions btn">contato@datastardust.com.br</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2025 Data Stardust — Karina Moura</div>
+  </footer>
 </body>
 </html>
