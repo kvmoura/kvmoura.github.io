@@ -1,297 +1,386 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Stardust • Consultoria em Produto & Dados</title>
-  <meta name="description" content="Consultoria em produto de software, análise de dados de produto e IA responsável por Karina Moura (Data Stardust). Estratégia, discovery, métricas, integrações e capacitação."/>
-  <style>
-    :root{
-      --bg: #0f1021; /* fundo escuro profundo para hero */
-      --surface: #ffffff; /* cartões */
-      --muted: #f6f7fb; /* seções claras */
-      --ink: #181a1f; /* texto principal */
-      --ink-2: #4a4f5a; /* texto secundário */
-      --primary: #6a4cff; /* violeta */
-      --primary-2: #9b8cff; /* violeta claro */
-      --accent: #19c6c9; /* ciano suave para detalhes */
-      --radius: 16px;
-      --shadow: 0 8px 24px rgba(16, 20, 40, .12);
-      --space: clamp(16px, 2.5vw, 28px);
-      --maxw: 1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:#fff; line-height:1.55}
-    a{color:var(--primary); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--space)}
-    /* Header */
-    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(6px); background:rgba(255,255,255,.7); border-bottom:1px solid #eef0f5}
-    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px}
-    .logo{width:28px; height:28px; border-radius:8px; background: radial-gradient(120% 120% at 10% 10%, var(--primary) 0%, #7b5bff 60%, var(--accent) 100%); box-shadow:0 4px 10px rgba(106,76,255,.35)}
-    .nav a{font-weight:600}
-    .actions a.btn{padding:10px 14px; border-radius:12px; background:var(--primary); color:#fff; box-shadow:var(--shadow)}
-    .actions a.btn.outline{background:transparent; color:var(--primary); border:1.5px solid var(--primary)}
-
-    /* Hero */
-    .hero{background:linear-gradient(180deg, var(--bg) 0%, #171936 60%, #1b1e40 100%); color:#fff; padding:72px 0 56px}
-    .hero h1{margin:0 0 12px; font-size:clamp(28px, 4vw, 46px); line-height:1.1}
-    .hero p{color:#e9e9ff; font-size:clamp(16px, 1.8vw, 20px); max-width:880px}
-    .hero .badge{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:999px; color:#d5d7ff; margin-bottom:16px}
-    .cta{display:flex; gap:12px; margin-top:22px}
-    .cta a{display:inline-block; padding:12px 16px; border-radius:14px; font-weight:700}
-    .cta .primary{background:var(--accent); color:#0b1b1c}
-    .cta .ghost{border:1.5px solid rgba(255,255,255,.3); color:#fff}
-
-    /* Trust strip */
-    .strip{background:var(--muted); border-bottom:1px solid #eef0f5}
-    .strip .items{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; padding:14px 0; color:#656b78; font-size:14px}
-
-    /* Sections */
-    section{padding:56px 0}
-    h2{font-size:clamp(22px, 3vw, 32px); margin:0 0 12px; letter-spacing:.2px}
-    .sub{color:var(--ink-2); margin:0 0 24px}
-
-    /* Grid cards */
-    .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px}
-    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px}
-    .card h3{margin:0 0 8px; font-size:18px}
-    .card p{margin:0}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#f0f1ff; color:#5147ff; font-weight:600; font-size:12px}
-
-    /* Two-column */
-    .cols{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
-    @media (max-width: 860px){ .cols{grid-template-columns:1fr} }
-
-    /* Process */
-    .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
-    .step{background:var(--surface); border-radius:14px; padding:18px; border:1px solid #eef0f5}
-    .step b{display:block; margin-bottom:6px}
-
-    /* Pricing-like */
-    .plans{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
-    .plan{background:var(--surface); border-radius:16px; box-shadow:var(--shadow); padding:22px; border:1px solid #eef0f5}
-    .plan h3{margin:0 0 6px}
-    .plan ul{margin:12px 0 0; padding-left:18px}
-
-    /* Footer */
-    footer{background:#0f1128; color:#c9cbe6; padding:32px 0; margin-top:24px}
-    footer a{color:#c9e7ff}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo Interativo - Karina Moura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a fixed sidebar for quick navigation and a main content area. The structure is thematic: Resumo, Habilidades, Experiência, Outras Atividades e Formação. The 'Experiência' section is designed as an interactive vertical timeline where users click a job to reveal details. This structure was chosen to make a text-heavy document easily scannable and engaging, allowing users to drill down into specific areas of interest without being overwhelmed by a long scroll. The interactive timeline transforms passive reading into active exploration. -->
+    <!-- Visualization & Content Choices: 
+        - Resumo (Inform): Simple, impactful text block to set the stage.
+        - Habilidades (Compare/Inform): A horizontal bar chart (Chart.js/Canvas) to visually represent key PM skills, making them easier to digest than a bullet list. Interaction: Tooltips on hover. Justification: Visual comparison is faster and more engaging.
+        - Experiência (Organize/Change): An interactive timeline built with HTML/CSS/JS. Interaction: Click to expand details of each role. Justification: Breaks down a long career history into manageable, user-driven chunks, improving usability and focus.
+        - Outras Atividades/Formação (Organize): Clean, card-based layouts using HTML/Tailwind. Justification: Provides clear, structured information without cognitive overload.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #D1D5DB;
+            border: 2px solid #FDFBF8;
+        }
+        .timeline-item.active::before {
+            background-color: #0D9488;
+        }
+        .nav-link.active {
+            color: #0D9488;
+            font-weight: 700;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>Data Stardust</div>
-      </div>
-      <nav class="actions">
-        <a href="#servicos">Serviços</a>
-        &nbsp;·&nbsp;
-        <a href="#casos">Resultados</a>
-        &nbsp;·&nbsp;
-        <a href="#processo">Processo</a>
-        &nbsp;·&nbsp;
-        <a href="#contato" class="btn">Fale comigo</a>
-      </nav>
-    </div>
-  </header>
+<body class="antialiased">
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-1/5 bg-[#F8F5F0] p-8 fixed h-full hidden lg:block">
+            <h1 class="text-2xl font-bold text-teal-700">Karina Moura</h1>
+            <p class="text-sm text-gray-600">Senior Product Manager</p>
+            <nav class="mt-12">
+                <ul class="space-y-4">
+                    <li><a href="#resumo" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Resumo</a></li>
+                    <li><a href="#habilidades" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Habilidades</a></li>
+                    <li><a href="#experiencia" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Experiência</a></li>
+                    <li><a href="#outras-atividades" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Outras Atividades</a></li>
+                    <li><a href="#formacao" class="nav-link text-gray-600 hover:text-teal-600 font-medium transition-colors">Formação</a></li>
+                </ul>
+            </nav>
+            <div class="absolute bottom-8 text-sm text-gray-500">
+                <p>kvargasmoura@gmail.com</p>
+                <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-teal-600 hover:underline">LinkedIn Profile</a>
+            </div>
+        </aside>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="badge">Consultoria por <strong>Karina Moura</strong> — Produto, Dados & IA Responsável</div>
-      <h1>Estratégia de Produto + Dados acionáveis<br/>para destravar crescimento com responsabilidade</h1>
-      <p>
-        Ajudo empresas a evoluírem seus produtos de software com <strong>visão estratégica</strong>,
-        <strong>métricas de produto</strong> e <strong>boas práticas de IA responsável</strong>.
-        Minha experiência inclui liderança em <em>marketing automation</em>, gestão de contatos, segmentação, integrações e compliance — com entregas de alto impacto na RD Station (TOTVS).
-      </p>
-      <div class="cta">
-        <a class="primary" href="#contato">Agendar diagnóstico</a>
-        <a class="ghost" href="#sobre">Conhecer minha abordagem</a>
-      </div>
-    </div>
-  </section>
+        <!-- Main Content -->
+        <main class="lg:ml-[20%] w-full lg:w-4/5 p-6 sm:p-12">
+            
+            <!-- Mobile Header -->
+            <div class="lg:hidden mb-8 p-4 bg-[#F8F5F0] rounded-lg shadow">
+                 <h1 class="text-2xl font-bold text-teal-700">Karina Moura</h1>
+                 <p class="text-sm text-gray-600">Senior Product Manager</p>
+                 <div class="mt-4 text-sm text-gray-500">
+                    <p>kvargasmoura@gmail.com</p>
+                    <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-teal-600 hover:underline">LinkedIn Profile</a>
+                 </div>
+            </div>
 
-  <!-- Trust strip / expertise highlights -->
-  <div class="strip">
-    <div class="wrap items">
-      <div>✓ Roadmaps e priorização orientados a valor</div>
-      <div>✓ Segmentação, retenção e métricas (AARRR, North Star)</div>
-      <div>✓ IA Responsável: princípios, requisitos e governança</div>
-      <div>✓ Integrações, ecossistema e confiabilidade de plataforma</div>
-    </div>
-  </div>
+            <!-- Resumo Section -->
+            <section id="resumo" class="mb-16 min-h-[60vh] flex items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-teal-800 mb-4">Resumo Profissional</h2>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        Gerente de Produto Sênior com mais de 6 anos de experiência em SaaS e 8 anos em desenvolvimento de produto orientado a dados. Líder comprovada na criação de estratégia de produto e na condução da inovação, da descoberta à entrega. Minha expertise reside em utilizar <strong>análise de produto</strong>, <strong>Big Data</strong> e <strong>inteligência de mercado</strong> para desenvolver soluções escaláveis. Tenho um histórico sólido de traduzir desafios de negócio complexos em resultados claros e mensuráveis, garantindo o alinhamento entre as equipes de engenharia, design e negócios. Sou profundamente comprometida com o design ético de produtos e com o fomento de uma cultura de tomada de decisões baseada em dados.
+                    </p>
+                </div>
+            </section>
 
-  <!-- Serviços -->
-  <section id="servicos">
-    <div class="wrap">
-      <h2>Como posso ajudar</h2>
-      <p class="sub">Pacotes flexíveis, com foco no que gera impacto nos próximos 90 dias — sem perder a visão de longo prazo.</p>
-      <div class="grid">
-        <div class="card">
-          <span class="pill">Estratégia de Produto</span>
-          <h3>Direção clara e priorização</h3>
-          <p>Definição de visão, objetivos e outcomes, desenho de roadmaps por horizontes, matrizes de priorização e tradução de estratégia em backlog acionável.</p>
-        </div>
-        <div class="card">
-          <span class="pill">Dados de Produto</span>
-          <h3>Métricas que guiam decisões</h3>
-          <p>Instrumentação, definição de North Star e OMTM, coorte, funil, retenção, churn, uso por segmento, e dashboards executivos.
-          </p>
-        </div>
-        <div class="card">
-          <span class="pill">IA Responsável & Compliance</span>
-          <h3>Valor com segurança</h3>
-          <p>Aplicação prática de princípios (EAD/IEEE), requisitos funcionais e não-funcionais, avaliação de riscos, testes, documentação e governança de IA.</p>
-        </div>
-        <div class="card">
-          <span class="pill">Discovery & UX Research</span>
-          <h3>Aprendizado rápido com clientes</h3>
-          <p>Jobs To Be Done, entrevistas, mapeamento de dores, definição de hipóteses, experimentos e validação de solução/valor.</p>
-        </div>
-        <div class="card">
-          <span class="pill">Integrações & Plataforma</span>
-          <h3>Ecossistema e confiabilidade</h3>
-          <p>Arquitetura orientada a eventos, integrações com CRM/e-commerce, revisão de SLIs/SLOs, diagnóstico de falhas e consistência de dados.</p>
-        </div>
-        <div class="card">
-          <span class="pill">Treinamentos</span>
-          <h3>Capacitação de times</h3>
-          <p>Workshops de métricas de produto, discovery, escrita de PRDs, ética em IA, e rituais de execução para aumentar cadência e qualidade.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- Habilidades Section -->
+            <section id="habilidades" class="mb-16">
+                <h2 class="text-3xl font-bold text-teal-800 mb-6">Habilidades Principais de PM</h2>
+                <p class="text-gray-600 mb-8 max-w-3xl">
+                    Esta seção destaca minhas competências fundamentais em gestão de produtos, desde a concepção estratégica até a execução e análise. O gráfico abaixo visualiza o meu foco e experiência nas diferentes áreas que compõem o ciclo de vida de um produto de sucesso.
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+            </section>
 
-  <!-- Sobre + Diferenciais em duas colunas -->
-  <section id="sobre" style="background:var(--muted)">
-    <div class="wrap cols">
-      <div>
-        <h2>Quem sou</h2>
-        <p class="sub">Sou <strong>Karina Moura</strong>, Product Manager com background em desenvolvimento de software e ciência de dados. Atuei nos pilares de <em>contact management</em>, segmentação, integridade de dados, integrações e privacidade no RD Station (TOTVS), e pesquiso <strong>ética aplicada à IA</strong>.</p>
-        <p>Trago uma abordagem prática, orientada a resultados e explicável: decisões baseadas em dados, comunicação clara entre áreas, e responsabilidade no uso de IA.</p>
-      </div>
-      <div>
-        <h2>Meus diferenciais</h2>
-        <div class="grid" style="grid-template-columns:1fr 1fr">
-          <div class="card"><h3>Estratégia + Execução</h3><p>Conecto diretriz executiva ao dia a dia do time — do outcome ao ticket — mantendo cadência de entrega.</p></div>
-          <div class="card"><h3>Dados acionáveis</h3><p>Métricas que explicam causa e efeito, não só relatam. Foco em aprender e decidir.</p></div>
-          <div class="card"><h3>Confiabilidade</h3><p>Obcecada por integridade de dados, SLIs/SLOs e redução de incidentes que corroem valor.</p></div>
-          <div class="card"><h3>IA com responsabilidade</h3><p>Frameworks para reduzir riscos, construir confiança e acelerar adoção com critérios claros.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- Experiência Section -->
+            <section id="experiencia" class="mb-16">
+                <h2 class="text-3xl font-bold text-teal-800 mb-6">Experiência Profissional</h2>
+                 <p class="text-gray-600 mb-12 max-w-3xl">
+                    Navegue pela minha trajetória profissional de forma interativa. Clique em cada empresa para expandir e ver em detalhes os projetos, responsabilidades e os resultados que alcancei em cada função.
+                </p>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <div id="timeline-nav" class="relative border-l-2 border-gray-200 ml-4">
+                            <!-- Timeline navigation items will be injected here by JS -->
+                        </div>
+                    </div>
+                    <div id="experience-details" class="md:w-2/3">
+                        <!-- Experience details will be injected here by JS -->
+                    </div>
+                </div>
+            </section>
 
-  <!-- Casos / Resultados (sem dados sensíveis) -->
-  <section id="casos">
-    <div class="wrap">
-      <h2>Resultados em que atuei</h2>
-      <p class="sub">Alguns destaques da minha trajetória (descritos de forma genérica por confidencialidade):</p>
-      <div class="grid">
-        <div class="card">
-          <h3>Flexibilização de entrada de leads</h3>
-          <p>Permitiu criação e gestão de contatos sem e-mail, abrindo caminho para identificadores multicanal (ex.: telefone/WhatsApp) e novas estratégias de pricing.</p>
-        </div>
-        <div class="card">
-          <h3>Reestruturação de segmentação</h3>
-          <p>Aumento de adoção e redução de erros, com melhorias em usabilidade, performance e indicadores de confiabilidade.</p>
-        </div>
-        <div class="card">
-          <h3>Integrações & ecossistema</h3>
-          <p>Novas integrações com e-commerce por iPaaS, impulsionando expansão de mercado e cobertura de casos críticos de dados.</p>
-        </div>
-        <div class="card">
-          <h3>IA aplicada</h3>
-          <p>Entrega de capacidades de inteligência (ex.: otimização de envio) com critérios de avaliação, documentação e mitigação de risco.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- Outras Atividades Section -->
+            <section id="outras-atividades" class="mb-16">
+                <h2 class="text-3xl font-bold text-teal-800 mb-6">Outras Atividades</h2>
+                 <p class="text-gray-600 mb-8 max-w-3xl">
+                    Além do meu trabalho principal, dedico tempo para compartilhar conhecimento e contribuir com a comunidade de tecnologia e produtos. Estas atividades refletem meu compromisso com o desenvolvimento de novos talentos e a promoção da educação.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-bold text-xl text-teal-700 mb-2">Mentoria em Produto</h3>
+                        <p class="text-gray-600">Atuei como mentora na iniciativa <strong>Mulheres de Produto</strong>, contribuindo para o desenvolvimento de futuras líderes e auxiliando na formação de profissionais na área.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-bold text-xl text-teal-700 mb-2">Educação Profissional</h3>
+                        <p class="text-gray-600">Ministrei aulas para uma turma do 9º ano do ensino fundamental sobre tecnologia, inteligência artificial, times ágeis, programação e criação de jogos.</p>
+                    </div>
+                </div>
+            </section>
 
-  <!-- Processo de trabalho -->
-  <section id="processo" style="background:var(--muted)">
-    <div class="wrap">
-      <h2>Como trabalho</h2>
-      <p class="sub">Transparência, velocidade de aprendizado e foco em impacto mensurável.</p>
-      <div class="steps">
-        <div class="step"><b>1) Diagnóstico</b>Entendimento de contexto, metas e dores. Levantamento de métricas, arquitetura e processos.</div>
-        <div class="step"><b>2) Plano & hipóteses</b>Definição de outcomes, riscos e apostas. Roadmap tático com critérios de sucesso.</div>
-        <div class="step"><b>3) Entrega</b>Suporte na execução (discovery/PRDs/experimentos), ritos de acompanhamento e comunicação entre áreas.</div>
-        <div class="step"><b>4) Acompanhamento</b>Medição de resultados, ajustes, e handover com documentação para autonomia do time.</div>
-      </div>
+            <!-- Formação Section -->
+            <section id="formacao">
+                <h2 class="text-3xl font-bold text-teal-800 mb-6">Formação e Certificações</h2>
+                <p class="text-gray-600 mb-8 max-w-3xl">
+                    Minha base acadêmica e certificações contínuas são a base do meu conhecimento técnico e estratégico. Busco constantemente aprender sobre novas tecnologias e metodologias para aplicar no desenvolvimento de produtos inovadores.
+                </p>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="font-bold text-teal-700">Mestrado em Inteligência Artificial, Robótica, Ética</p>
+                        <p class="text-gray-600">Universidade Federal do Rio Grande do Sul (Conclusão Prevista: Janeiro de 2025)</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="font-bold text-teal-700">Product Analytics - Certificação</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="font-bold text-teal-700">Introduction to Data Analytics on Google Cloud - Certificação</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="font-bold text-teal-700">Idiomas</p>
+                        <p class="text-gray-600">Português (Nativo), Inglês (Profissional Completo)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-  </section>
 
-  <!-- Planos / Formas de contratação -->
-  <section id="planos">
-    <div class="wrap">
-      <h2>Formatos de contratação</h2>
-      <div class="plans">
-        <div class="plan">
-          <h3>Diagnóstico Express (2–3 semanas)</h3>
-          <p>Mapa de oportunidades priorizadas e plano de 90 dias.</p>
-          <ul>
-            <li>Entrevistas rápidas + revisão de métricas</li>
-            <li>Top 5 apostas por impacto vs. esforço</li>
-            <li>Roadmap tático com primeiros experimentos</li>
-          </ul>
-        </div>
-        <div class="plan">
-          <h3>Projeto Estratégico (1–3 meses)</h3>
-          <p>Do diagnóstico à entrega das primeiras melhorias.</p>
-          <ul>
-            <li>Discovery, métricas, PRDs e acompanhamento</li>
-            <li>Integrações/dados: consistência e confiabilidade</li>
-            <li>IA responsável: requisitos e governança</li>
-          </ul>
-        </div>
-        <div class="plan">
-          <h3>Advisory Contínuo</h3>
-          <p>Mentoria executiva e revisão mensal de estratégia e resultados.</p>
-          <ul>
-            <li>Office hours quinzenais</li>
-            <li>Revisão de roadmap, métricas e riscos</li>
-            <li>Suporte a decisões críticas</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Estratégia de Produto',
+                        'Análise de Produto',
+                        'Inteligência de Mercado',
+                        'Desenvolvimento Orientado a Dados',
+                        'Metodologias Ágeis',
+                        'Gestão de Stakeholders',
+                        'IA Aplicada'
+                    ],
+                    datasets: [{
+                        label: 'Nível de Experiência',
+                        data: [95, 90, 85, 92, 88, 93, 80],
+                        backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                        borderColor: 'rgba(15, 118, 110, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#0F766E',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 12
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return ` Expertise: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                             ticks: {
+                                font: {
+                                    size: 14,
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#4A4A4A'
+                            }
+                        }
+                    }
+                }
+            });
 
-  <!-- Contato -->
-  <section id="contato" style="background:linear-gradient(180deg, #fafbff 0%, #f3f5ff 100%)">
-    <div class="wrap cols">
-      <div>
-        <h2>Vamos conversar?</h2>
-        <p class="sub">Conte seu contexto e eu proponho o melhor formato. Sem compromisso.</p>
-        <p><strong>Email:</strong> <a href="mailto:contato@datastardust.com.br">contato@datastardust.com.br</a><br/>
-           <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kvmoura/" target="_blank" rel="noopener">/in/kvmoura</a></p>
-      </div>
-      <div class="card">
-        <h3>Checklist do primeiro contato</h3>
-        <ul>
-          <li>Objetivos de negócio (próx. 6–12 meses)</li>
-          <li>Métricas atuais e principais dores</li>
-          <li>Arquitetura e integrações críticas</li>
-          <li>Riscos e restrições (compliance/IA)</li>
-        </ul>
-        <p style="margin-top:12px;color:var(--ink-2)">Com isso, preparo um diagnóstico inicial e próximos passos.</p>
-      </div>
-    </div>
-  </section>
+            // Experience Data
+            const experiences = [
+                {
+                    company: 'Sesc/RS',
+                    role: 'Inteligência de Mercado',
+                    date: 'Setembro de 2025 - Presente',
+                    details: []
+                },
+                {
+                    company: 'RD Station',
+                    role: 'Gerente de Produto Sênior',
+                    date: 'Janeiro de 2022 - Agosto de 2025',
+                    details: [
+                        '<strong>Gerente de Produto Sênior - Plataforma de Dados do Cliente (Jan 2024 - Ago 2025):</strong><ul><li class="mt-2 ml-4 list-disc">Liderou a iniciativa <strong>Catalisa.AI</strong>, um projeto de inteligência estratégica que mapeou dores do cliente e tendências de mercado, orientando decisões da liderança sobre investimentos em IA e modernização da plataforma.</li><li class="mt-2 ml-4 list-disc">Conduziu uma reformulação fundamental da lógica de identidade de leads para suportar uma estratégia multicanal.</li><li class="mt-2 ml-4 list-disc">Liderou uma reestruturação técnica do editor de segmentação, melhorando o desempenho e a confiabilidade do sistema.</li></ul>',
+                        '<strong>Gerente de Produto - Integrações Nativas de Ecossistema (Jan 2022 - Dez 2023):</strong><ul><li class="mt-2 ml-4 list-disc">Liderou o desenvolvimento de integrações nativas com plataformas como Shopify, o que acelerou o tempo de conexão e <strong>reduziu a evasão (churn)</strong>.</li><li class="mt-2 ml-4 list-disc">Lançou o <strong>Campaign Manager</strong>, impulsionando um <strong>aumento de 9% na Receita Mensal Recorrente (MRR)</strong>.</li></ul>',
+                        '<strong>Gerente de Produto - Qualificação de Contatos (Jun 2021 - Dez 2021):</strong><ul><li class="mt-2 ml-4 list-disc">Contribuiu para o desenvolvimento da funcionalidade <strong>Intelligent Sending</strong>, que aprimorou o desempenho de campanhas.</li></ul>',
+                    ]
+                },
+                {
+                    company: 'Data Science Brigade',
+                    role: 'Gerente de Dados de Produto',
+                    date: 'Outubro de 2019 - Maio de 2021',
+                    details: [
+                        'Liderou o desenvolvimento de uma solução de Processamento de Linguagem Natural (NLP) que analisa automaticamente documentos de licitação pública para sinalizar padrões de risco, permitindo <strong>auditorias mais rápidas e abrangentes</strong>.'
+                    ]
+                },
+                {
+                    company: 'Cappra Institute',
+                    role: 'Gerente de Dados de Produto',
+                    date: 'Fevereiro de 2019 - Outubro de 2019',
+                    details: [
+                        'Liderou um estudo de campo nacional que envolveu 40 organizações de varejo brasileiras, resultando na criação de um <strong>Índice de Maturidade Analítica (IMA)</strong>.'
+                    ]
+                },
+                {
+                    company: 'Mconf',
+                    role: 'Gerente de Produto',
+                    date: 'Dezembro de 2016 - Fevereiro de 2019',
+                    details: [
+                        'Liderou a criação da estratégia de "go-to-market" para o Elos.vc, definindo a identidade de marca, a mensagem e o posicionamento estratégico.'
+                    ]
+                }
+            ];
 
-  <footer>
-    <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
-      <div>© 2025 Data Stardust — Consultoria em Produto & Dados</div>
-      <div><a href="#">Política de Privacidade</a> · <a href="#">Termos</a></div>
-    </div>
-  </footer>
+            // Populate Experience Timeline
+            const timelineNav = document.getElementById('timeline-nav');
+            const experienceDetailsContainer = document.getElementById('experience-details');
+            
+            experiences.forEach((exp, index) => {
+                const navItem = document.createElement('div');
+                navItem.classList.add('timeline-item', 'relative', 'ml-8', 'pb-8', 'cursor-pointer');
+                navItem.dataset.index = index;
+                navItem.innerHTML = `
+                    <h3 class="font-bold text-lg text-gray-800">${exp.company}</h3>
+                    <p class="text-sm text-gray-500">${exp.date}</p>
+                `;
+                timelineNav.appendChild(navItem);
+
+                const detailItem = document.createElement('div');
+                detailItem.classList.add('experience-detail-content', 'hidden');
+                detailItem.dataset.index = index;
+                let detailHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2">${exp.company}</h3>
+                        <p class="text-md font-semibold text-gray-600 mb-4">${exp.role}</p>
+                `;
+                exp.details.forEach(d => {
+                    detailHTML += `<div class="text-gray-700 leading-relaxed mt-3">${d}</div>`;
+                });
+                detailHTML += `</div>`;
+                detailItem.innerHTML = detailHTML;
+                experienceDetailsContainer.appendChild(detailItem);
+            });
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const detailItems = document.querySelectorAll('.experience-detail-content');
+
+            function showExperience(index) {
+                timelineItems.forEach(item => item.classList.remove('active'));
+                detailItems.forEach(item => item.classList.add('hidden'));
+
+                timelineItems[index].classList.add('active');
+                detailItems[index].classList.remove('hidden');
+            }
+
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    showExperience(item.dataset.index);
+                });
+            });
+
+            // Show first experience by default
+            if(timelineItems.length > 0) {
+                 showExperience(0);
+            }
+           
+
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
