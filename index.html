@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Resume - Karina Moura</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curriculum Vitae Interativo • Karina Moura</title>
+    <meta name="description" content="CV interativo de Karina Moura — Senior Product Manager, Ética em IA, Inteligência de Mercado."/>
+    <!-- Importa o Tailwind CSS para o estilo -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root{
+        :root {
             --bg: #0f1021;
             --surface: #ffffff;
             --muted: #f6f7fb;
@@ -20,360 +18,292 @@
             --accent: #19c6c9;
             --radius: 16px;
             --shadow: 0 8px 24px rgba(16, 20, 40, .12);
-            --space: clamp(16px, 2.5vw, 28px);
-            --maxw: 980px;
+            --space: clamp(1rem, 2.5vw, 1.75rem);
+            --maxw: 1100px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            background-color: #fff;
+            line-height: 1.55;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg);
-            color: var(--ink);
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
         }
-        h1, h2, h3 {
-            font-family: 'Lato', sans-serif;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--ink-2);
-            border: 2px solid var(--surface);
-        }
-        .timeline-item.active::before {
-            background-color: var(--accent);
-        }
-        .nav-link.active {
+
+        a:hover {
+            text-decoration: underline;
             color: var(--accent);
-            font-weight: 700;
         }
-        .chart-container {
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 var(--space);
+        }
+
+        .timeline-container {
             position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
         }
+        
         @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
+            .timeline-container::before {
+                content: "";
+                position: absolute;
+                left: 260px;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background-color: #ddd;
             }
-        }
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="antialiased text-gray-800">
-
-    <!-- Top Header Section -->
-    <header class="bg-indigo-950 text-white py-8 px-6 sm:px-12 shadow-lg">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-lg">DS</div>
-                <h1 class="text-3xl font-bold">Data Stardust</h1>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    
+    <!-- Barra de navegação fixa com efeito blur -->
+    <header class="sticky top-0 z-50 backdrop-blur-sm bg-white bg-opacity-70 border-b border-gray-200">
+        <div class="wrap flex items-center justify-between h-16">
+            <div class="flex items-center space-x-2 font-extrabold text-lg">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#6a4cff] via-[#7b5bff] to-[#19c6c9]"></div>
+                <div>Karina Moura</div>
             </div>
-            <nav class="hidden md:flex space-x-6">
-                <a href="mailto:kvargasmoura@gmail.com" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition-colors">Contact</a>
+            <nav>
+                <a class="px-4 py-2 rounded-xl text-white bg-purple-600 hover:bg-purple-700 transition duration-300 shadow-lg" href="#contact">Contato</a>
             </nav>
-        </div>
-        <div class="max-w-7xl mx-auto mt-8">
-            <h2 class="text-4xl font-bold mb-2">Karina Moura</h2>
-            <p class="text-xl text-gray-300">Product Manager • Product Data • Responsible AI</p>
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="py-12 px-6 sm:px-12 bg-gray-900">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Column -->
-            <div class="lg:col-span-2 space-y-8">
+    <!-- Seção de destaque (Hero) -->
+    <section class="bg-gradient-to-b from-[#0f1021] via-[#171936] to-[#1b1e40] text-white py-16 text-center">
+        <div class="wrap">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Karina Moura</h1>
+            <p class="text-gray-300">
+                Senior Product Manager | Ética em IA | Inteligência de Mercado | Mentora<br>
+                Porto Alegre, Rio Grande do Sul, Brasil | 
+                <a href="mailto:kvargasmoura@gmail.com" class="text-indigo-300 hover:underline">kvargasmoura@gmail.com</a> | 
+                <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/kvmoura/" class="text-indigo-300 hover:underline">www.linkedin.com/in/kvmoura</a>
+            </p>
+        </div>
+    </section>
 
-                <!-- Summary Section -->
-                <section id="resumo" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Summary</h2>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        Senior Product Manager with 6+ years in SaaS and 8 years in data-driven product development. At RD Station, I lead strategic initiatives in the marketing automation platform, driving innovation in contact management, segmentation, data interoperability, and legal compliance.
-                        One of my most impactful contributions was leading the **Catalisa.AI** initiative, an exploratory analysis that mapped customer pains, product gaps, and market trends. The project served as a strategic intelligence hub, guiding leadership decisions on AI investments and driving RDSM modernization. This initiative laid the foundation for the platform's evolution toward intelligent automation, omnichannel scalability, and sustainable growth.
-                    </p>
-                    <p class="text-lg leading-relaxed text-gray-700 mt-4">
-                        In parallel, I have led complex projects such as the redesign of lead identity logic, a long-term effort requiring alignment across legacy systems, interfaces, and squads. This foundational change enables flexible data input, improves deduplication, and supports a multichannel strategy, positioning RD Station as a key platform for marketing orchestration.
-                        My responsibilities span defining product roadmaps, translating strategy into measurable outcomes, and ensuring stakeholder alignment across engineering, design, support, and business teams. With Agile methodologies, I focus on transforming complex challenges into scalable, value-driven solutions.
-                    </p>
-                </section>
+    <!-- Resumo Profissional -->
+    <section class="py-10">
+        <div class="wrap">
+            <h2 class="text-2xl font-bold mb-4">Resumo Profissional</h2>
+            <p class="text-gray-700">Senior Product Manager com mais de 6 anos em SaaS e 8 anos em desenvolvimento de produtos baseados em dados. Líder comprovada na elaboração de estratégia de produto e na condução da inovação, da descoberta à entrega. Minha experiência se baseia em alavancar análise de produto, big data e inteligência de mercado para desenvolver soluções escaláveis. Tenho um forte histórico de traduzir desafios de negócios complexos em resultados claros e mensuráveis, garantindo alinhamento entre as equipes de engenharia, design e negócios.</p>
+        </div>
+    </section>
 
-                <!-- Experience Section -->
-                <section id="experience" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Experience</h2>
-                    <p class="text-gray-600 mb-8 max-w-3xl">
-                        Navigate my professional journey interactively. Click on each company to expand and see in detail the projects, responsibilities, and results I achieved in each role.
-                    </p>
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <div id="timeline-nav" class="relative border-l-2 border-gray-300 ml-4">
-                                <!-- Timeline navigation items will be injected here by JS -->
-                            </div>
-                        </div>
-                        <div id="experience-details" class="md:w-2/3">
-                            <!-- Experience details will be injected here by JS -->
-                        </div>
-                    </div>
-                </section>
+    <!-- Habilidades Principais -->
+    <section class="py-10 bg-gray-100">
+        <div class="wrap">
+            <h2 class="text-2xl font-bold mb-4">Habilidades Principais de PM</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong>Estratégia de Produto:</strong> Definição de roteiros de produto, alinhamento com objetivos de negócios e identificação de oportunidades de mercado.</li>
+                <li><strong>Análise de Produto:</strong> Utilização de dados para informar decisões de produto, definir métricas de sucesso e mensurar impacto.</li>
+                <li><strong>Inteligência de Mercado:</strong> Condução de análise competitiva, compreensão de tendências de mercado e identificação de dores do cliente.</li>
+                <li><strong>Desenvolvimento de Produto Orientado por Dados:</strong> Liderança de iniciativas em interoperabilidade de dados, segmentação e modernização de plataformas.</li>
+                <li><strong>Metodologias Ágeis:</strong> Prática de Kanban com foco em entrega contínua e previsibilidade.</li>
+                <li><strong>Gestão de Stakeholders:</strong> Garantia de alinhamento e comunicação entre equipes multifuncionais.</li>
+                <li><strong>IA Aplicada:</strong> Liderança de projetos envolvendo IA/ML para aprimorar as capacidades do produto e resolver problemas de negócios complexos.</li>
+            </ul>
+        </div>
+    </section>
 
-                <!-- Other Activities Section -->
-                <section id="other-activities" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Other Activities</h2>
-                    <div class="space-y-6">
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <h3 class="font-bold text-xl text-gray-900 mb-2">Product Mentorship</h3>
-                            <p class="text-gray-600">I currently serve as a mentor in the **Women of Product** initiative, contributing to the development of future leaders and assisting in the training of professionals in the field.</p>
-                        </div>
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <h3 class="font-bold text-xl text-gray-900 mb-2">Professional Education</h3>
-                            <p class="text-gray-600">I taught a class to a 9th-grade elementary school class on technology, artificial intelligence, agile teams, programming, and game creation.</p>
-                        </div>
+    <!-- Experiência (Timeline interativa) -->
+    <section class="py-10">
+        <div class="wrap">
+            <h2 class="text-2xl font-bold mb-4">Experiência</h2>
+            <p class="text-gray-500 mb-6">Navegue pela minha jornada profissional interativamente. Clique em cada cargo para ver os detalhes.</p>
+            
+            <div class="timeline-container md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-8">
+                <!-- Coluna da linha do tempo -->
+                <div class="jobs-list md:col-span-1 lg:col-span-1">
+                    <!-- Sesc/RS -->
+                    <div class="job-item relative py-2 pr-4 md:pr-0 cursor-pointer transition-all duration-300 hover:bg-gray-100 rounded-lg p-3" data-template-id="sesc">
+                        <span class="absolute left-0 md:left-[253px] top-4 w-3.5 h-3.5 rounded-full bg-purple-600 -translate-x-1/2"></span>
+                        <h3 class="text-lg font-semibold md:pl-0">Sesc/RS</h3>
+                        <time class="text-gray-500 text-sm">Set 2025 – Presente</time>
                     </div>
-                </section>
-                
-                <!-- Education Section -->
-                <section id="formacao" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Education</h2>
-                    <div class="space-y-6">
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <p class="font-bold text-gray-900">Master's Degree in Artificial Intelligence, Robotics, Ethics</p>
-                            <p class="text-gray-600">Federal University of Rio Grande do Sul (Expected Completion: January 2025)</p>
-                        </div>
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <p class="font-bold text-gray-900">Bachelor's Degree in Business Administration and Management, Data Science</p>
-                            <p class="text-gray-600">Federal University of Rio Grande do Sul (2011-2018)</p>
-                        </div>
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <p class="font-bold text-gray-900">Bachelor's Degree in Computer Engineering</p>
-                            <p class="text-gray-600">Federal University of Rio Grande do Sul (2008-2011)</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
 
-            <!-- Right Column -->
-            <div class="space-y-8">
-                <!-- Contact Section -->
-                <section id="contato" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Contact</h2>
-                    <div class="text-lg">
-                        <p class="mb-2"><span class="font-bold">Email:</span> <a href="mailto:kvargasmoura@gmail.com" class="text-purple-600 hover:underline">kvargasmoura@gmail.com</a></p>
-                        <p><span class="font-bold">LinkedIn:</span> <a href="https://www.linkedin.com/in/kvmoura" target="_blank" class="text-purple-600 hover:underline">/in/kvmoura</a></p>
+                    <!-- RD Station -->
+                    <div class="job-item relative py-2 pr-4 md:pr-0 cursor-pointer transition-all duration-300 hover:bg-gray-100 rounded-lg p-3" data-template-id="rd">
+                        <span class="absolute left-0 md:left-[253px] top-4 w-3.5 h-3.5 rounded-full bg-purple-600 -translate-x-1/2"></span>
+                        <h3 class="text-lg font-semibold md:pl-0">RD Station</h3>
+                        <time class="text-gray-500 text-sm">Jun 2021 – Ago 2025</time>
                     </div>
-                </section>
 
-                <!-- Skills Section -->
-                <section id="competencias" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Skills</h2>
-                     <p class="text-gray-600 mb-8 max-w-3xl">
-                        My competencies in product management and data science. The chart below visualizes my focus and expertise in each area.
-                    </p>
-                    <div class="chart-container">
-                        <canvas id="skillsChart"></canvas>
+                    <!-- Data Science Brigade -->
+                    <div class="job-item relative py-2 pr-4 md:pr-0 cursor-pointer transition-all duration-300 hover:bg-gray-100 rounded-lg p-3" data-template-id="ds">
+                        <span class="absolute left-0 md:left-[253px] top-4 w-3.5 h-3.5 rounded-full bg-purple-600 -translate-x-1/2"></span>
+                        <h3 class="text-lg font-semibold md:pl-0">Data Science Brigade</h3>
+                        <time class="text-gray-500 text-sm">Out 2019 – Mai 2021</time>
                     </div>
-                </section>
-                
-                 <!-- Certifications Section -->
-                <section id="certificacoes" class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Certifications</h2>
-                    <div class="space-y-6">
-                         <div class="p-6 rounded-lg border border-gray-200">
-                            <p class="font-bold text-gray-900">Product Analytics - Certification</p>
-                        </div>
-                        <div class="p-6 rounded-lg border border-gray-200">
-                            <p class="font-bold text-gray-900">Introduction to Data Analytics on Google Cloud - Certification</p>
-                        </div>
+
+                    <!-- Cappra Institute -->
+                    <div class="job-item relative py-2 pr-4 md:pr-0 cursor-pointer transition-all duration-300 hover:bg-gray-100 rounded-lg p-3" data-template-id="cappra">
+                        <span class="absolute left-0 md:left-[253px] top-4 w-3.5 h-3.5 rounded-full bg-purple-600 -translate-x-1/2"></span>
+                        <h3 class="text-lg font-semibold md:pl-0">Cappra Institute for Data Science</h3>
+                        <time class="text-gray-500 text-sm">Fev 2019 – Out 2019</time>
                     </div>
-                </section>
+
+                    <!-- Mconf -->
+                    <div class="job-item relative py-2 pr-4 md:pr-0 cursor-pointer transition-all duration-300 hover:bg-gray-100 rounded-lg p-3" data-template-id="mconf">
+                        <span class="absolute left-0 md:left-[253px] top-4 w-3.5 h-3.5 rounded-full bg-purple-600 -translate-x-1/2"></span>
+                        <h3 class="text-lg font-semibold md:pl-0">Mconf</h3>
+                        <time class="text-gray-500 text-sm">Dez 2016 – Fev 2019</time>
+                    </div>
+                </div>
+
+                <!-- Painel de detalhes (coluna principal) -->
+                <div id="detail-panel" class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg mt-8 md:mt-0">
+                    <h3 class="text-xl font-bold text-gray-800">Selecione uma empresa à esquerda</h3>
+                    <p class="text-gray-500 mt-2">Os cargos e resultados aparecerão aqui.</p>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
+    <!-- Templates para os detalhes de cada cargo -->
+    <template id="sesc-template">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Pesquisa de Mercado</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Insights de Stakeholders</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Sesc/RS</h3>
+        <p class="text-gray-500 text-sm mb-4">Set 2025 – Presente</p>
+        <h4 class="text-lg font-bold text-gray-700">Analista de Mercado</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Análise de mercado e criação de novos produtos de pesquisa para stakeholders públicos e internos.</li>
+        </ul>
+    </template>
+
+    <template id="rd-template">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-green-100 text-green-700 font-semibold text-xs px-2 py-1 rounded-full border border-green-300">+9% MRR</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Catalisa.AI</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Identidade Multicanal</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Confiabilidade↑</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">RD Station</h3>
+        <p class="text-gray-500 text-sm mb-4">Jun 2021 – Ago 2025</p>
+
+        <h4 class="text-lg font-bold text-gray-700 mt-6">Senior Product Manager — Customer Data Platform (Jan 2024 – Ago 2025)</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Liderou o <strong>Catalisa.AI</strong>, mapeando dores e tendências para guiar investimentos em IA e modernização da plataforma.</li>
+            <li>Redesenhou a lógica de identidade de leads para estratégia multicanal (dedup + entrada flexível).</li>
+            <li>Reestruturou o editor de segmentação para melhorar o desempenho e a confiabilidade das consultas.</li>
+        </ul>
+
+        <h4 class="text-lg font-bold text-gray-700 mt-6">Product Manager — Integrações Nativas do Ecossistema (Jan 2022 – Dez 2023)</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Lançou integrações nativas (ex: Shopify) reduzindo o churn e acelerando a conexão.</li>
+            <li>Entregou o <strong>Campaign Manager</strong> (análise de funil) gerando <strong>+9% MRR</strong>.</li>
+        </ul>
+
+        <h4 class="text-lg font-bold text-gray-700 mt-6">Product Manager — Qualificação de Contatos (Jun 2021 – Dez 2021)</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Contribuiu para o <strong>Envio Inteligente</strong>, otimizando o tempo de envio e o engajamento.</li>
+        </ul>
+    </template>
+
+    <template id="ds-template">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Flags de Risco NLP</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Velocidade de Auditoria↑</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Data Science Brigade</h3>
+        <p class="text-gray-500 text-sm mb-4">Out 2019 – Mai 2021</p>
+        <h4 class="text-lg font-bold text-gray-700">Gerente de Dados de Produto</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Construiu uma solução de NLP para analisar documentos de licitação pública e sinalizar padrões de risco, possibilitando auditorias mais rápidas e abrangentes.</li>
+        </ul>
+    </template>
+
+    <template id="cappra-template">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Índice IMA</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">40 Organizações</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Cappra Institute for Data Science</h3>
+        <p class="text-gray-500 text-sm mb-4">Fev 2019 – Out 2019</p>
+        <h4 class="text-lg font-bold text-gray-700">Gerente de Dados de Produto</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Liderou um estudo de campo nacional com 40 varejistas; criou o Índice de Maturidade Analítica (IMA) para priorizar parcerias e construção de capacidade.</li>
+        </ul>
+    </template>
+
+    <template id="mconf-template">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Go-to-Market</span>
+            <span class="bg-gray-100 text-gray-700 font-semibold text-xs px-2 py-1 rounded-full border border-gray-300">Marca e Posicionamento</span>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Mconf</h3>
+        <p class="text-gray-500 text-sm mb-4">Dez 2016 – Fev 2019</p>
+        <h4 class="text-lg font-bold text-gray-700">Product Manager</h4>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mt-2">
+            <li>Liderou a estratégia de go-to-market para Elos.vc: identidade de marca, mensagens e posicionamento estratégico para educação e pesquisa.</li>
+        </ul>
+    </template>
+
+    <!-- Educação e Certificações -->
+    <section class="py-10 bg-gray-100">
+        <div class="wrap">
+            <h2 class="text-2xl font-bold mb-4">Formação & Certificações</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong>Mestrado</strong> — Inteligência Artificial, Robótica, Ética, Universidade Federal do Rio Grande do Sul (Conclusão Prevista Dez 2027)</li>
+                <li><strong>Product Analytics</strong> — Certificação</li>
+                <li><strong>Introduction to Data Analytics on Google Cloud</strong> — Certificação</li>
+                <li><strong>Idiomas:</strong> Português (Nativo), Inglês (Profissional Completo)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contact" class="py-10">
+        <div class="wrap">
+            <h2 class="text-2xl font-bold mb-4">Contato</h2>
+            <p class="text-gray-700">Email: <a href="mailto:kvargasmoura@gmail.com" class="text-purple-600 hover:underline">kvargasmoura@gmail.com</a></p>
+            <p class="text-gray-700">LinkedIn: <a href="https://www.linkedin.com/in/kvmoura/" target="_blank" rel="noopener" class="text-purple-600 hover:underline">www.linkedin.com/in/kvmoura</a></p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center mt-6">
+        <div class="wrap">© 2025 Karina Moura</div>
+    </footer>
+
+    <!-- Script para a funcionalidade interativa -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Skills Chart
-            const ctx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'Product Strategy',
-                        'Product Analytics',
-                        'Market Intelligence',
-                        'Data-Driven Development',
-                        'Agile Methodologies',
-                        'Applied AI'
-                    ],
-                    datasets: [{
-                        label: 'Experience Level',
-                        data: [95, 90, 85, 92, 88, 80],
-                        backgroundColor: 'rgba(25, 198, 201, 0.6)',
-                        borderColor: 'rgba(25, 198, 201, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'var(--accent)',
-                            titleFont: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            bodyFont: {
-                                size: 12
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    return ` Expertise: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                            ticks: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                             ticks: {
-                                font: {
-                                    size: 14,
-                                    family: "'Roboto', sans-serif"
-                                },
-                                color: 'var(--ink)'
-                            }
-                        }
-                    }
-                }
-            });
+        const detailPanel = document.getElementById('detail-panel');
+        const jobItems = document.querySelectorAll('.job-item');
 
-            // Experience Data
-            const experiences = [
-                {
-                    company: 'Sesc/RS',
-                    role: 'Market Analysis Specialist',
-                    date: 'September 2025 - Present',
-                    details: ['Market Analysis Specialist for expansion and creation of new products and services. Uses public and internal data to generate insights.']
-                },
-                {
-                    company: 'RD Station',
-                    role: 'Senior Product Manager',
-                    date: 'January 2024 - August 2025',
-                    details: [
-                        '**Senior Product Manager - Customer Data Platform (Jan 2024 - Aug 2025):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Led the **Catalisa.AI** initiative, a strategic intelligence project that mapped customer pains and market trends, guiding leadership decisions on AI investments and platform modernization.</li><li>Led a fundamental reformulation of lead identity logic to support a multi-channel strategy, improving data deduplication and flexibility.</li><li>Led a technical restructuring of the segmentation editor and the upgrade of data indexing technology, improving system performance, stability, and reliability.</li></ul>',
-                        '**Product Manager - Native Ecosystem Integrations (Jan 2022 - Dec 2023):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Launched **Campaign Manager**, a marketing funnel analysis tool, which drove a **9% increase in Monthly Recurring Revenue (MRR)**.</li><li>Launched 4 new integrations with e-commerce via an iPaaS partner, **doubling RDSM adoption in the sector**.</li><li>Contributed to the development of the **Intelligent Sending** feature, which enhanced campaign performance and the platform\'s intelligence perception.</li></ul>',
-                        '**Product Manager - Contact Qualification (June 2021 - December 2021):**<ul class="list-disc ml-6 space-y-2 mt-2"><li>Contributed to the development of the **Intelligent Sending** feature to identify the best time to send emails, improving engagement rates and campaign performance.</li></ul>'
-                    ]
-                },
-                {
-                    company: 'RNP',
-                    role: 'Technical Assistant',
-                    date: 'January 2022 - December 2022',
-                    details: ['Collaborated with the Technical Committee on Data Science and Artificial Intelligence (CT-CDIA) to study the future of AI applications, with an emphasis on areas of interest to RNP, such as education and cybersecurity.']
-                },
-                {
-                    company: 'Data Science Brigade',
-                    role: 'Product Data Manager',
-                    date: 'October 2019 - May 2021',
-                    details: [
-                        'Led the development of a Natural Language Processing (NLP) solution that automatically analyzes public bidding documents to flag risk patterns, enabling **faster and more comprehensive audits**.'
-                    ]
-                },
-                {
-                    company: 'Cappra Institute',
-                    role: 'Product Data Manager',
-                    date: 'February 2019 - October 2019',
-                    details: [
-                        'Led a national field study involving 40 Brazilian retail organizations, resulting in the creation of an **Analytical Maturity Index (IMA)**.'
-                    ]
-                },
-                {
-                    company: 'Mconf',
-                    role: 'Product Manager',
-                    date: 'December 2016 - February 2019',
-                    details: [
-                        'Led the creation of the go-to-market strategy for Elos.vc, defining the brand identity, messaging, and strategic positioning.'
-                    ]
-                }
-            ];
+        function selectJob(el) {
+            jobItems.forEach(item => item.classList.remove('bg-gray-200', 'font-bold'));
+            el.classList.add('bg-gray-200', 'font-bold');
 
-            // Populate Experience Timeline
-            const timelineNav = document.getElementById('timeline-nav');
-            const experienceDetailsContainer = document.getElementById('experience-details');
+            const templateId = el.dataset.templateId;
+            const template = document.getElementById(templateId + '-template');
             
-            experiences.forEach((exp, index) => {
-                const navItem = document.createElement('div');
-                navItem.classList.add('timeline-item', 'relative', 'ml-8', 'pb-8', 'cursor-pointer');
-                navItem.dataset.index = index;
-                navItem.innerHTML = `
-                    <h3 class="font-bold text-lg text-gray-900">${exp.company}</h3>
-                    <p class="text-sm text-gray-500">${exp.date}</p>
-                `;
-                timelineNav.appendChild(navItem);
-
-                const detailItem = document.createElement('div');
-                detailItem.classList.add('experience-detail-content', 'hidden');
-                detailItem.dataset.index = index;
-                let detailHTML = `
-                    <div class="p-6 rounded-lg border border-gray-200">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">${exp.company}</h3>
-                        <p class="text-md font-semibold text-gray-600 mb-4">${exp.role}</p>
-                `;
-                exp.details.forEach(d => {
-                    detailHTML += `<div class="text-gray-700 leading-relaxed mt-3">${d}</div>`;
-                });
-                detailHTML += `</div>`;
-                detailItem.innerHTML = detailHTML;
-                experienceDetailsContainer.appendChild(detailItem);
-            });
-
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            const detailItems = document.querySelectorAll('.experience-detail-content');
-
-            function showExperience(index) {
-                timelineItems.forEach(item => item.classList.remove('active'));
-                detailItems.forEach(item => item.classList.add('hidden'));
-
-                timelineItems[index].classList.add('active');
-                detailItems[index].classList.remove('hidden');
+            if (template) {
+                detailPanel.innerHTML = template.innerHTML;
             }
+        }
 
-            timelineItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    showExperience(item.dataset.index);
-                });
-            });
+        // Adiciona eventos de clique a todos os itens da linha do tempo
+        jobItems.forEach(item => {
+            item.addEventListener('click', () => selectJob(item));
+        });
 
-            // Show first experience by default
-            if(timelineItems.length > 0) {
-                 showExperience(0);
+        // Seleciona o primeiro item ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            if (jobItems.length > 0) {
+                selectJob(jobItems[0]);
             }
         });
     </script>
