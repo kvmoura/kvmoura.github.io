@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como um LLM Funciona</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .concept-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'llm-primary': '#4f46e5',
+                        'llm-secondary': '#8b5cf6',
+                        'llm-bg': '#f3f4f6',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título Principal -->
+        <header class="text-center mb-12 p-6 bg-white rounded-xl concept-card">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-llm-primary mb-2">
+                O Segredo dos LLMs
+            </h1>
+            <p class="text-lg text-gray-600">
+                Uma explicação simplificada sobre como a magia acontece por trás dos Modelos de Linguagem Grande.
+            </p>
+        </header>
+
+        <!-- Seção 1: A Ideia Principal -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b-2 border-llm-primary pb-2">
+                O Que Eles Realmente Fazem?
+            </h2>
+            <div class="bg-llm-bg p-6 rounded-xl concept-card">
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    LLMs (como o Gemini, por exemplo) são essencialmente <strong class="text-llm-primary">máquinas de previsão de texto</strong>. Eles foram treinados com quantidades massivas de texto da internet (livros, artigos, conversas) e sua única função é calcular qual é a <strong class="text-llm-secondary">palavra ou token mais provável</strong> que virá a seguir em uma sequência. Eles não "entendem" ou "pensam" da forma humana; eles apenas dominam padrões estatísticos de linguagem.
+                </p>
+            </div>
+        </section>
+
+        <!-- O Processo em 3 Passos -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Passo 1: Tokenização e Embeddings -->
+            <div class="concept-card bg-white p-6 rounded-xl border-t-4 border-red-500 flex flex-col">
+                <div class="text-3xl font-extrabold text-red-500 mb-2">1. Tokenização</div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">O Input vira Números</h3>
+                <p class="text-gray-600 mb-4 text-sm flex-grow">
+                    O texto de entrada é dividido em "tokens" (palavras, pedaços de palavras ou pontuação). Depois, cada token é transformado em um vetor numérico (Embedding) que representa seu significado.
+                </p>
+                <!-- Diagrama 1: Tokenização e Embedding (SVG) -->
+                <div class="flex flex-col items-center mt-auto">
+                    <svg class="w-full h-20" viewBox="0 0 300 100">
+                        <!-- Frase -->
+                        <text x="50" y="20" font-size="14" fill="#1f2937" font-weight="bold">O LLM</text>
+                        <text x="150" y="20" font-size="14" fill="#1f2937" font-weight="bold">funciona</text>
+                        <!-- Setas para Tokens -->
+                        <path d="M75 25 L75 40" stroke="#f87171" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M175 25 L175 40" stroke="#f87171" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <!-- Tokens -->
+                        <rect x="25" y="45" width="100" height="20" fill="#fee2e2" rx="5"/>
+                        <text x="75" y="60" font-size="12" fill="#b91c1c" text-anchor="middle">['O', 'LLM']</text>
+                        <rect x="150" y="45" width="100" height="20" fill="#fee2e2" rx="5"/>
+                        <text x="200" y="60" font-size="12" fill="#b91c1c" text-anchor="middle">['funciona']</text>
+                        <!-- Vetores -->
+                        <rect x="25" y="75" width="100" height="20" fill="#ef4444" rx="5"/>
+                        <text x="75" y="90" font-size="12" fill="white" text-anchor="middle">Vetor [0.1...0.9]</text>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#f87171" />
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Passo 2: O Mecanismo de Atenção (Transformer) -->
+            <div class="concept-card bg-white p-6 rounded-xl border-t-4 border-llm-primary flex flex-col">
+                <div class="text-3xl font-extrabold text-llm-primary mb-2">2. Atenção</div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">O Contexto é Tudo</h3>
+                <p class="text-gray-600 mb-4 text-sm flex-grow">
+                    O modelo usa o mecanismo de "Atenção" (Self-Attention) para saber quais palavras anteriores são mais relevantes ao processar o token atual. Isso define o contexto da frase.
+                </p>
+                <!-- Diagrama 2: Atenção (SVG) -->
+                <div class="flex flex-col items-center mt-auto">
+                    <svg class="w-full h-20" viewBox="0 0 300 100">
+                        <text x="50" y="20" font-size="14" fill="#1f2937">A Maria pegou o</text>
+                        <rect x="170" y="5" width="50" height="20" fill="#d9f99d" rx="5"/>
+                        <text x="195" y="20" font-size="14" fill="#1f2937" font-weight="bold" text-anchor="middle">guarda-</text>
+                        
+                        <!-- Setas de Atenção -->
+                        <path d="M195 25 C150 50, 50 50, 50 75" stroke="#4f46e5" stroke-width="1" fill="none" opacity="0.6"/>
+                        <path d="M195 25 C180 50, 100 50, 100 75" stroke="#4f46e5" stroke-width="1" fill="none" opacity="0.8"/>
+                        
+                        <!-- Predição -->
+                        <rect x="170" y="65" width="50" height="20" fill="#4f46e5" rx="5"/>
+                        <text x="195" y="80" font-size="14" fill="white" text-anchor="middle">chuva</text>
+
+                        <text x="100" y="90" font-size="10" fill="#4f46e5" text-anchor="middle">Atenção forte em "Maria"</text>
+                        
+                        <defs>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#4f46e5" />
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Passo 3: Previsão e Geração -->
+            <div class="concept-card bg-white p-6 rounded-xl border-t-4 border-llm-secondary flex flex-col">
+                <div class="text-3xl font-extrabold text-llm-secondary mb-2">3. Geração</div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-700">A Escolha da Próxima Palavra</h3>
+                <p class="text-gray-600 mb-4 text-sm flex-grow">
+                    Com base no contexto (Passo 2), o modelo gera uma lista de probabilidades para o próximo token. Ele então seleciona o token, e o ciclo se repete para a próxima palavra.
+                </p>
+                <!-- Diagrama 3: Previsão (SVG) -->
+                <div class="flex flex-col items-center mt-auto">
+                    <svg class="w-full h-20" viewBox="0 0 300 100">
+                        <text x="20" y="20" font-size="14" fill="#1f2937">Qual é o próximo token?</text>
+
+                        <!-- Barra de Probabilidade 1 (Alto) -->
+                        <rect x="50" y="40" width="100" height="15" fill="#8b5cf6" rx="3"/>
+                        <text x="155" y="52" font-size="12" fill="#1f2937">Carro (70%)</text>
+
+                        <!-- Barra de Probabilidade 2 (Médio) -->
+                        <rect x="50" y="60" width="50" height="15" fill="#c4b5fd" rx="3"/>
+                        <text x="105" y="72" font-size="12" fill="#1f2937">Livro (20%)</text>
+
+                        <!-- Barra de Probabilidade 3 (Baixo) -->
+                        <rect x="50" y="80" width="25" height="15" fill="#e0e7ff" rx="3"/>
+                        <text x="80" y="92" font-size="12" fill="#1f2937">Xícara (10%)</text>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Seção Final: O Treinamento (A Magia de Fundo) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b-2 border-llm-secondary pb-2">
+                Como Eles Ficam Tão Inteligentes?
+            </h2>
+            <div class="bg-white p-6 rounded-xl concept-card">
+                <p class="text-gray-700 leading-relaxed">
+                    O poder de um LLM vem do seu <strong class="font-semibold text-llm-primary">Treinamento em Auto-Supervisão</strong>. O modelo é alimentado com trilhões de palavras e é desafiado a prever a próxima palavra em milhões de frases. Durante esse processo, ele ajusta continuamente seus <strong class="font-semibold text-llm-secondary">parâmetros (pesos)</strong> para reduzir o erro de previsão.
+                </p>
+                <p class="text-gray-700 leading-relaxed mt-3">
+                    É essa repetição massiva que o faz internalizar gramática, fatos, raciocínio e até mesmo códigos de programação, tudo como um subproduto da sua única missão: <span class="italic">ser o melhor em adivinhar a próxima palavra.</span>
+                </p>
+                <div class="mt-6 text-center">
+                    <span class="inline-block bg-llm-primary text-white text-sm font-semibold px-4 py-2 rounded-full">
+                        Em resumo: LLM = Tokenização + Transformer (Atenção) + Previsão de Probabilidade.
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 text-gray-500 text-sm">
+            Criado com base na arquitetura Transformer.
+        </footer>
+    </div>
+</body>
+</html>
